@@ -22,7 +22,7 @@ function Sign() {
     });
   };
 
-  const submitId2 = () => {
+  const submitId2 = async() => {
     const post = {
       id: signState.id,
       pwd: signState.pwd,
@@ -30,7 +30,7 @@ function Sign() {
 
     console.log('Request Body:', signState.id);  // 클라이언트 콘솔 로그 추가
 
-    fetch("http://localhost:4000/SignUp", {
+    await fetch("http://localhost:4000/SignUp", {
       method: "post",
       headers: {
         "content-type": "application/json",
