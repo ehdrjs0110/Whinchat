@@ -17,6 +17,7 @@ app.use(cors())
 
 app.post('/signIn',async(req,res) => {  // 로그인 데이터 불러오기
 
+  try{
     const {id,pwd} = req.body;
 
     console.log(req.body.id)
@@ -57,6 +58,10 @@ app.post('/signIn',async(req,res) => {  // 로그인 데이터 불러오기
     }
     client.close();
     console.log('Connection closed');
+  }catch(err){
+    console.error(err);
+  }
+    
 } );
 
 app.post('/signUp', async (req, res) => { // 회원가입 데이터 불러오기
