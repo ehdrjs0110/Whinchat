@@ -74,7 +74,7 @@ function Sign() {
       pwd: loginState.pwd,
     };
 
-    fetch("http://localhost:4000/SignIn", {
+    fetch("http://localhost:4000/signIn", {
       method: "post",
       headers: {
         "content-type": "application/json",
