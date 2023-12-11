@@ -59,7 +59,7 @@ app.post('/signIn',async(req,res) => {  // 로그인 데이터 불러오기
     client.close();
     console.log('Connection closed');
   }catch(err){
-    console.log(req.body)
+    console.log("req : " + req.body)
     console.error(err);
   }
     
