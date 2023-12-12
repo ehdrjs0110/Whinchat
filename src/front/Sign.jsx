@@ -30,7 +30,7 @@ function Sign() {
 
     console.log('Request Body:', signState.id);  // 클라이언트 콘솔 로그 추가
 
-    fetch("http://localhost:4000/SignUp", {
+    fetch("http://3.36.66.72:4000/SignUp", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -74,7 +74,7 @@ function Sign() {
       pwd: loginState.pwd,
     };
 
-    fetch("http://localhost:4000/SignIn", {
+    fetch("http://3.36.66.72:4000/SignIn", {
       method: "post",
       headers: {
         "content-type": "application/json",
