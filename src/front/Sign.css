@@ -39,7 +39,7 @@ input {
   z-index: 5;
 }
 
-form {
+.signform{
   display: flex;
   align-items: center;
   justify-content: center;

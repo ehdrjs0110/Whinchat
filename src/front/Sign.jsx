@@ -122,7 +122,7 @@ return (
 <div className={`container ${isSignUpMode ? 'sign-up-mode' : ''}`}>
   <div className="forms-container">
       <div className="signin-signup">
-          <form action="" className="sign-in-form" >
+          <form action="" className="sign-in-form" id="signform">
               <h2 className="title">Sign in</h2>
               <div className="input-field">
                   <i className="fas fa-user"></i>
@@ -148,7 +148,7 @@ return (
               </div>
           </form>
 
-          <form action="" className="sign-up-form" >
+          <form action="" className="sign-up-form" id="signform">
               <h2 className="title">Sign up</h2>
               <div className="input-field">
                   <i className="fas fa-user"></i>
