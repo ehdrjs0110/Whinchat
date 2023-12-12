@@ -24,7 +24,7 @@ app.post('/signIn',async(req,res) => {  // 로그인 데이터 불러오기
     console.log(req.body.pwd)
 
     const { MongoClient, ServerApiVersion } = require('mongodb');
-    const uri = "mongodb://127.0.0.1:27017";
+    const uri = "mongodb://127.0.0.1:16045";
 
     // 데이터베이스와 컬렉션 이름
     const dbName = 'whinchat';
