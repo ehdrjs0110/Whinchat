@@ -141,13 +141,13 @@ const inhandleClick = () => {
               <p>{cookies.get("id")}</p>
                     <div className="input-field">
                         <i className="fas fa-user"></i>
-                        <input type="text" placeholder="Username" />
+                        <input type="text" placeholder="Username" onChange={handleLogin} />
                     </div>
                     <div className="input-field">
                         <i className="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" />
+                        <input type="password" placeholder="Password" onChange={handleLogin}/>
                     </div>
-                    <input type="submit" value="Login" className="btn solid"/>
+                    <input type="button" value="Login" className="btn solid" onClick={submitId}/>
 
                     <p className="social-text">다른 계정으로 로그인</p>
                     <div className="social-media">
@@ -167,17 +167,17 @@ const inhandleClick = () => {
                     <h2 className="title">Sign up</h2>
                     <div className="input-field">
                         <i className="fas fa-user"></i>
-                        <input type="text" placeholder="Username" />
+                        <input type="text" placeholder="Username" onChange={handleLogin} />
                     </div>
                     <div className="input-field">
                         <i className="fas fa-lock"></i>
-                        <input type="password" placeholder="Password"  />
+                        <input type="password" placeholder="Password" onChange={handleLogin} />
                     </div>
                     <div className="input-field">
                         <i className="fas fa-lock"></i>
                         <input type="password" placeholder="Re_Password" />
                     </div>
-                    <input type="submit" value="Login" className="btn solid"/>
+                    <input type="button" value="Login" className="btn solid" onClick={submitId2}/>
 
                     <p className="social-text">다른계정으로 로그인</p>
                     <div className="social-media">
