@@ -181,27 +181,27 @@ form.sign-in-form {
 .img1:before
 {
   background-image: url(../../public/image/wood2.jpg);
-  opacity: 0.8;
+  opacity: 0.7;
 }
 .img2:before
 {
   background-image: url(../../public/image/wood3.jpg);
-  opacity: 0.8;
+  opacity: 0.7;
 }
 .img3:before
 {
   background-image: url(../../public/image/wood6.jpg);
-  opacity: 0.8;
+  opacity: 0.7;
 }
 .img4:before
 {
   background-image: url(../../public/image/wood8.jpg);
-  opacity: 0.8;
+  opacity: 0.7;
 }
 .img5:before
 {
   background-image: url(../../public/image/wood9.jpg);
-  opacity: 0.8;
+  opacity: 0.7;
 
 }
 /* .image {
