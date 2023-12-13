@@ -8,15 +8,13 @@ import { useNavigate } from "react-router-dom";
   
 import {Cookies} from 'react-cookie';
 
+const backgroundArr = ["img1","img2", "img3", "img4", "img5"]; 
+const randomIndex = Math.floor(Math.random() * backgroundArr.length);
+const backgroundImg = backgroundArr[randomIndex];
+
 function Sign() {
   const navigate = useNavigate();
   const cookies = new Cookies();
-
-  // 클릭하면 container 클래스가 container sign-up-mode로 클래스 이름으로 바껴야됨
-
-  const backgroundArr = ["img1","img2", "img3", "img4", "img5"]; 
-  const randomIndex = Math.floor(Math.random() * backgroundArr.length);
-  const backgroundImg = backgroundArr[randomIndex];
 
   const [loginState, setLoginState] = useState({
     id: "",
