@@ -283,6 +283,22 @@ form.sign-in-form {
 .right-panel .image,
 .right-panel .content {
   transform: translateX(800px);
+
+  .img1:before{
+    opacity: 1;
+  }
+  .img2:before{
+    opacity: 1;
+  }
+  .img3:before{
+    opacity: 1;
+  }
+  .img4:before{
+    opacity: 1;
+  }
+  .img5:before{
+    opacity: 1;
+  }
 }
 
 /* 애니메이션 */
@@ -295,7 +311,6 @@ form.sign-in-form {
 .container.sign-up-mode .left-panel .image,
 .container.sign-up-mode .left-panel .content {
   transform: translateX(-800px);
-  opacity: 1;
 }
 
 .container.sign-up-mode .signin-signup {
