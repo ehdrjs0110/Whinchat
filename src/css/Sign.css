@@ -222,7 +222,7 @@ form.sign-in-form {
 
 .panel::before{
   background-color: black;
-  opacity: 0.2;
+  opacity: 0.4;
 }
 
 .left-panel {
