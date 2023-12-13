@@ -180,36 +180,33 @@ form.sign-in-form {
 
 .img1:before
 {
-  background-image: url(../../public/image/wood2.jpg);
+  background-image: url(../../public/image/wood1.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
 .img2:before
 {
-  background-image: url(../../public/image/wood3.jpg);
+  background-image: url(../../public/image/wood2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
 .img3:before
 {
-  background-image: url(../../public/image/wood6.jpg);
+  background-image: url(../../public/image/wood3.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  color: #000;
 }
 .img4:before
 {
-  background-image: url(../../public/image/wood8.jpg);
+  background-image: url(../../public/image/wood4.png);
   background-size: cover;
   background-repeat: no-repeat;
-  color: #000;
 }
 .img5:before
 {
-  background-image: url(../../public/image/wood9.jpg);
+  background-image: url(../../public/image/wood5.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  color: #000;
 }
 /* .image {
   width: 70%;
