@@ -180,22 +180,32 @@ form.sign-in-form {
 .img1:before
 {
   background-image: url(../../public/image/wood2.jpg);
+  background-color: black;
+  opacity: 1;
 }
 .img2:before
 {
   background-image: url(../../public/image/wood3.jpg);
+  background-color: black;
+  opacity: 1;
 }
 .img3:before
 {
   background-image: url(../../public/image/wood6.jpg);
+  background-color: black;
+  opacity: 1;
 }
 .img4:before
 {
   background-image: url(../../public/image/wood8.jpg);
+  background-color: black;
+  opacity: 1;
 }
 .img5:before
 {
   background-image: url(../../public/image/wood9.jpg);
+  background-color: black;
+  opacity: 1;
 
 }
 /* .image {
