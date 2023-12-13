@@ -11,6 +11,13 @@ import {Cookies} from 'react-cookie';
 function Sign() {
   const navigate = useNavigate();
   const cookies = new Cookies();
+
+  // 클릭하면 container 클래스가 container sign-up-mode로 클래스 이름으로 바껴야됨
+
+  const backgroundArr = ["img1","img2", "img3", "img4", "img5"]; 
+  const randomIndex = Math.floor(Math.random() * backgroundArr.length);
+  const backgroundImg = backgroundArr[randomIndex];
+
   const [loginState, setLoginState] = useState({
     id: "",
     pwd: "",
@@ -126,11 +133,6 @@ const inhandleClick = () => {
   setIsSignUpMode(false);
 };
 
-    // 클릭하면 container 클래스가 container sign-up-mode로 클래스 이름으로 바껴야됨
-
-    const backgroundArr = ["img1","img2", "img3", "img4", "img5"]; 
-    const randomIndex = Math.floor(Math.random() * backgroundArr.length);
-    const backgroundImg = backgroundArr[randomIndex];
 
   return (
       <div className={`container ${backgroundImg}  ${isSignUpMode ? 'sign-up-mode' : ''}`}>
