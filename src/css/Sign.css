@@ -173,7 +173,7 @@ form.sign-in-form {
   /* background-image: url('../../public/image/wood.jpg'); */
   /* background-image: linear-gradient(-45deg, #11A3C0 0%, #11A3C0 100%); */
   box-shadow:0 10px 20px rgba(0, 0, 0, 0.8);
-  transition: 1.0s ease-in-out; /*천천 보통 천천*/  border-radius: 50%;
+  transition: 0.5s ease-in-out; /*천천 보통 천천*/  border-radius: 50%;
   z-index: 6;
   /* box-shadow: 1px 1px 9px 3px #000 inset */
 }
