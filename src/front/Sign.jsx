@@ -141,11 +141,11 @@ const inhandleClick = () => {
               <p>{cookies.get("id")}</p>
                     <div className="input-field">
                         <i className="fas fa-user"></i>
-                        <input type="text" placeholder="Username" onChange={handleLogin} />
+                        <input type="text" placeholder="Username" id='id' name="id" onChange={handleLogin} />
                     </div>
                     <div className="input-field">
                         <i className="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" onChange={handleLogin}/>
+                        <input type="password" placeholder="Password" id='pwd' name='pwd' onChange={handleLogin}/>
                     </div>
                     <input type="button" value="Login" className="btn solid" onClick={submitId}/>
 
@@ -167,11 +167,11 @@ const inhandleClick = () => {
                     <h2 className="title">Sign up</h2>
                     <div className="input-field">
                         <i className="fas fa-user"></i>
-                        <input type="text" placeholder="Username" onChange={handleLogin} />
+                        <input type="text" name='id' id='id' placeholder="Username" onChange={handleSign} />
                     </div>
                     <div className="input-field">
                         <i className="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" onChange={handleLogin} />
+                        <input type="password" name='pwd' id='pwd' placeholder="Password" onChange={handleSign} />
                     </div>
                     <div className="input-field">
                         <i className="fas fa-lock"></i>
