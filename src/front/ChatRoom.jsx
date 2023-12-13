@@ -1,11 +1,10 @@
 import React from "react"
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {Cookies} from 'react-cookie';
 
 function ChatRoom() {
     const cookies = new Cookies();
     const navigate = useNavigate();
-    const location=useLocation()
     let idle = cookies.get('id');
     
     const logout = () => {
