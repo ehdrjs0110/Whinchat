@@ -233,7 +233,7 @@ form.sign-in-form {
   padding: 3rem 12% 2rem 17%;
 }
 
-.right-panel::before, .left-panel::before{
+.right-panel::after, .left-panel::after{
   background-color: rgba( 255, 255, 255, 0.5 );
 }
 
