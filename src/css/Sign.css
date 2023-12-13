@@ -176,36 +176,28 @@ form.sign-in-form {
   transition: 1.0s ease-in-out; /*천천 보통 천천*/  border-radius: 50%;
   z-index: 6;
   /* box-shadow: 1px 1px 9px 3px #000 inset */
+  background-color: black;
+  opacity: 0.5;
 }
 .img1:before
 {
   background-image: url(../../public/image/wood2.jpg);
-  background-color: black;
-  opacity: 1;
 }
 .img2:before
 {
   background-image: url(../../public/image/wood3.jpg);
-  background-color: black;
-  opacity: 1;
 }
 .img3:before
 {
   background-image: url(../../public/image/wood6.jpg);
-  background-color: black;
-  opacity: 1;
 }
 .img4:before
 {
   background-image: url(../../public/image/wood8.jpg);
-  background-color: black;
-  opacity: 1;
 }
 .img5:before
 {
   background-image: url(../../public/image/wood9.jpg);
-  background-color: black;
-  opacity: 1;
 
 }
 /* .image {
@@ -228,11 +220,6 @@ form.sign-in-form {
   justify-content: space-around;
   text-align: center;
   z-index: 6;
-}
-
-.panel::before{
-  background-color: black;
-  opacity: 1;
 }
 
 .left-panel {
