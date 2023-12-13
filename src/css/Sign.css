@@ -295,6 +295,7 @@ form.sign-in-form {
 .container.sign-up-mode .left-panel .image,
 .container.sign-up-mode .left-panel .content {
   transform: translateX(-800px);
+  opacity: 1;
 }
 
 .container.sign-up-mode .signin-signup {
