@@ -182,35 +182,35 @@ form.sign-in-form {
 {
   background-image: url(../../public/image/wood2.jpg);
   opacity: 0.7;
-  object-fit: fill;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 .img2:before
 {
   background-image: url(../../public/image/wood3.jpg);
   opacity: 0.7;
-  object-fit: fill;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 .img3:before
 {
   background-image: url(../../public/image/wood6.jpg);
   opacity: 0.7;
-  object-fit: fill;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 .img4:before
 {
   background-image: url(../../public/image/wood8.jpg);
   opacity: 0.7;
-  object-fit: fill;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 .img5:before
 {
   background-image: url(../../public/image/wood9.jpg);
   opacity: 0.7;
-  object-fit: fill;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 /* .image {
