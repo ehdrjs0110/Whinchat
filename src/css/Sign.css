@@ -218,6 +218,9 @@ form.sign-in-form {
   justify-content: space-around;
   text-align: center;
   z-index: 6;
+}
+
+.panel::before{
   background-color: black;
   opacity: 0.2;
 }
