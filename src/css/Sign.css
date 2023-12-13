@@ -14,7 +14,8 @@ input {
 .container {
   position: relative;
   width: 100%;
-  background-color: #fff;
+  background-color: #000;
+  opacity: 0.5;
   min-height: 100vh;
   overflow: hidden;
 }
@@ -176,8 +177,6 @@ form.sign-in-form {
   transition: 1.0s ease-in-out; /*천천 보통 천천*/  border-radius: 50%;
   z-index: 6;
   /* box-shadow: 1px 1px 9px 3px #000 inset */
-  background-color: black;
-  opacity: 0.5;
 }
 .img1:before
 {
