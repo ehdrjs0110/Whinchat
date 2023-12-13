@@ -219,13 +219,12 @@ form.sign-in-form {
   justify-content: space-around;
   text-align: center;
   z-index: 6;
-  background-color: rgba( 255, 255, 255, 0.5 );
 }
 
 .left-panel {
   pointer-events: all;
   padding: 3rem 17% 2rem 12%;
-  
+  background-color: rgba( 255, 255, 255, 0.5 );
   /* border-radius: 50%; */
 }
 
@@ -233,6 +232,7 @@ form.sign-in-form {
 .right-panel {
   pointer-events: none;
   padding: 3rem 12% 2rem 17%;
+  background-color: rgba( 255, 255, 255, 0.5 );
 }
 
 .panel .content {
@@ -245,8 +245,6 @@ form.sign-in-form {
   flex-direction: column;
   padding: 0rem 5rem;
   text-shadow: 2px 2px 6px black;
-  /* background-color : #000;
-  opacity: 0.2; */
 }
 
 .panel h3 {
