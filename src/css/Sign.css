@@ -181,35 +181,30 @@ form.sign-in-form {
 .img1:before
 {
   background-image: url(../../public/image/wood2.jpg);
-  opacity: 0.7;
   background-size: cover;
   background-repeat: no-repeat;
 }
 .img2:before
 {
   background-image: url(../../public/image/wood3.jpg);
-  opacity: 0.7;
   background-size: cover;
   background-repeat: no-repeat;
 }
 .img3:before
 {
   background-image: url(../../public/image/wood6.jpg);
-  opacity: 0.7;
   background-size: cover;
   background-repeat: no-repeat;
 }
 .img4:before
 {
   background-image: url(../../public/image/wood8.jpg);
-  opacity: 0.7;
   background-size: cover;
   background-repeat: no-repeat;
 }
 .img5:before
 {
   background-image: url(../../public/image/wood9.jpg);
-  opacity: 0.7;
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -283,22 +278,6 @@ form.sign-in-form {
 .right-panel .image,
 .right-panel .content {
   transform: translateX(800px);
-
-  .img1:before{
-    opacity: 1;
-  }
-  .img2:before{
-    opacity: 1;
-  }
-  .img3:before{
-    opacity: 1;
-  }
-  .img4:before{
-    opacity: 1;
-  }
-  .img5:before{
-    opacity: 1;
-  }
 }
 
 /* 애니메이션 */
