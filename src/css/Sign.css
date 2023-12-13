@@ -178,11 +178,6 @@ form.sign-in-form {
   /* box-shadow: 1px 1px 9px 3px #000 inset */
 }
 
-.container::before::before{
-  background-color: black;
-  opacity: 0.5;
-}
-
 .img1:before
 {
   background-image: url(../../public/image/wood2.jpg);
@@ -248,6 +243,7 @@ form.sign-in-form {
   justify-content: center;
   flex-direction: column;
   padding: 0rem 5rem;
+  text-shadow: 2px 2px 6px black;
 }
 
 .panel h3 {
