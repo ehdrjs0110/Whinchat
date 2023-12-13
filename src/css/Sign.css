@@ -33,7 +33,7 @@ input {
   transform: translate(-50%, -50%);
   left: 75%;
   width: 50%;
-  transition: 0.6s 0.3s ease-in-out;  /* 천천 - 보통 - 천천 */
+  transition: 0.6s 0.6s ease-in-out;  /* 천천 - 보통 - 천천 */
   display: grid;
   grid-template-columns: 1fr;
   z-index: 5;
