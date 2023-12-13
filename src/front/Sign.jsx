@@ -2,9 +2,11 @@ import './Sign.css';
 import '@fortawesome/fontawesome-free/css/all.min.css'; // 아이콘 임포트
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import {Cookies} from 'react-cookie';
 
 function Sign() {
   const navigate = useNavigate();
+  const cookies = new Cookies();
   const [loginState, setLoginState] = useState({
     id: "",
     pwd: "",
@@ -85,7 +87,9 @@ function Sign() {
       .then((json) => {
         if (json.cheked == true)
         {
-          // alert("로그인 성공")
+          //alert("로그인 성공")
+          //세션 설정
+          cookies.set("id", loginState.id);
           navigate('/ChatRoom');
 
         } else{
@@ -124,6 +128,7 @@ return (
       <div className="signin-signup">
           <form action="" className="sign-in-form" >
               <h2 className="title">Sign in</h2>
+              <p>{cookies.get("id")}</p>
               <div className="input-field">
                   <i className="fas fa-user"></i>
                   <input type="text" id="id" name="id" placeholder="Username" required onChange={handleLogin}/>

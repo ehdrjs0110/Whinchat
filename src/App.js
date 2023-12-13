@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 import Sign from './front/Sign';
 import ChatRoom from './front/ChatRoom';
+import Profile from './front/Profile';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/Sign" element={<Sign />} />
           <Route path="/ChatRoom" element={<ChatRoom />} />
+          <Route path="/Profile" element={<Profile />} />
         </Routes>
       </Router>
     </div>
