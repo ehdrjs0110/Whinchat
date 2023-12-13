@@ -218,6 +218,8 @@ form.sign-in-form {
   justify-content: space-around;
   text-align: center;
   z-index: 6;
+  background-color: black;
+  opacity: 0.2;
 }
 
 .left-panel {
