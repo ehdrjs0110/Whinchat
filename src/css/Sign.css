@@ -224,7 +224,6 @@ form.sign-in-form {
 .left-panel {
   pointer-events: all;
   padding: 3rem 17% 2rem 12%;
-  background-color: rgba( 255, 255, 255, 0.5 );
   /* border-radius: 50%; */
 }
 
@@ -232,6 +231,9 @@ form.sign-in-form {
 .right-panel {
   pointer-events: none;
   padding: 3rem 12% 2rem 17%;
+}
+
+.right-panel::before, .left-panel::before{
   background-color: rgba( 255, 255, 255, 0.5 );
 }
 
