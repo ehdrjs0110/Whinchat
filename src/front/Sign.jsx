@@ -177,7 +177,7 @@ const inhandleClick = () => {
                         <i className="fas fa-lock"></i>
                         <input type="password" placeholder="Re_Password" />
                     </div>
-                    <input type="button" value="Login" className="btn solid" onClick={submitId2}/>
+                    <input type="button" value="Sign up" className="btn solid" onClick={submitId2}/>
 
                     <p className="social-text">다른계정으로 로그인</p>
                     <div className="social-media">
