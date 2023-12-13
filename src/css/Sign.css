@@ -219,6 +219,7 @@ form.sign-in-form {
   justify-content: space-around;
   text-align: center;
   z-index: 6;
+  background-color: rgba( 255, 255, 255, 0.2 );
 }
 
 .left-panel {
@@ -246,7 +247,6 @@ form.sign-in-form {
   text-shadow: 2px 2px 6px black;
   /* background-color : #000;
   opacity: 0.2; */
-  background-color: rgba( 255, 255, 255, 0.2 );
 }
 
 .panel h3 {
