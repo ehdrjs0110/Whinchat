@@ -244,9 +244,6 @@ form.sign-in-form {
   flex-direction: column;
   padding: 0rem 5rem;
   text-shadow: 2px 2px 6px black;
-}
-
-.content::before{
   background-color : #000;
   opacity: 0.5;
 }
