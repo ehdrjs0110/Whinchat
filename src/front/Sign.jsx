@@ -4,10 +4,12 @@ import Snowfall from 'react-snowfall';
 import '@fortawesome/fontawesome-free/css/all.min.css'; // 아이콘 임포트
 import React, { Component, useRef, useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
+import {Cookies} from 'react-cookie';
 
 const backgroundArr = ["img1","img2", "img3", "img4", "img5"]; 
 const randomIndex = Math.floor(Math.random() * backgroundArr.length);
 const backgroundImg = backgroundArr[randomIndex];
+const cookies = new Cookies();
 
 function Sign() {
   const navigate = useNavigate();
@@ -94,8 +96,9 @@ function Sign() {
         {
           //alert("로그인 성공")
           //세션 설정
+          cookies.set(id, loginState.id); 
           navigate('/ChatRoom');
-
+          
         } else{
           alert("아이디 또는 비밀번호가 틀렸습니다.")
         }      
