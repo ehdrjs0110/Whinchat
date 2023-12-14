@@ -33,9 +33,9 @@ function Sign() {
 
   const submitId2 = () => {
 
-    if(signState.id=="" || signState.pwd=="" || signState.pwd_r==""){
+    if(signState.id=="" || signState.pwd=="" || signState.pwdr==""){
       alert("아이디 또는 비밀번호를 입력하세요.");
-    }else if(signState.pwd != signState.pwd_r){
+    }else if(signState.pwd != signState.pwdr){
       alert("비밀번호가 일치하지 않습니다.");
     }else{
       const post = {
@@ -186,7 +186,7 @@ const inhandleClick = () => {
                     </div>
                     <div className="input-field">
                         <i className="fas fa-lock"></i>
-                        <input type="password" name='pwd_r' id='pwd_r' placeholder="Re_Password" onChange={handleSign} />
+                        <input type="password" name='pwdr' id='pwdr' placeholder="Re_Password" onChange={handleSign} />
                     </div>
                     <input type="button" value="Sign up" className="btn solid" onClick={submitId2}/>
 
