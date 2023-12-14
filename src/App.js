@@ -5,6 +5,8 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Sign from './front/Sign';
 import Profile from './front/Profile';
 import Main from './front/Main';
+import Chat from './front/Chat';
+import Fr from './front/Fr';
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Routes>
           <Route path="/Sign" element={<Sign />} />
           <Route path="/Profile" element={<Profile />} />
+          <Route path="/Chat" element={<Chat />} />
+          <Route path="/Fr" element={<Fr />} />
           <Route path="/Main" element={<Main />} />
         </Routes>
       </Router>
