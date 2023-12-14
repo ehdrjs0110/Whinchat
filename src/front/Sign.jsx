@@ -96,7 +96,7 @@ function Sign() {
         {
           //alert("로그인 성공")
           //세션 설정
-          cookies.set(id, loginState.id); 
+          cookies.set("id", loginState.id); 
           navigate('/ChatRoom');
           
         } else{
