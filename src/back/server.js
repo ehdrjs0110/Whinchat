@@ -106,7 +106,7 @@ app.post('/signUp', async (req, res) => { // 회원가입 데이터 불러오기
 app.post('/profile',async(req,res) => {  // 프로필 변경
 
   try{
-    const {name,pr,id} = req.body;
+    var {name,pr,id} = req.body;
 
     console.log(req.body.name)
     console.log(req.body.pr)
@@ -135,14 +135,24 @@ app.post('/profile',async(req,res) => {  // 프로필 변경
       const database = client.db(dbName);
       const collection = database.collection(collectionName);
 
-      const data = await collection.updateOne(
-        { id: id },
-        { 
-          $set: { 
-            name: name,
-            pr : pr
-       }}
-      )
+      const profileData = await collection.findOne({ id });
+
+      if(name==""){
+        name = profileData.name;
+      }else if(pr==""){
+        pr = profileData.pr;
+      }else{
+        const data = await collection.updateOne(
+          { id: id },
+          { 
+            $set: { 
+              name: name,
+              pr : pr
+         }}
+        )
+      }
+
+      
   
       console.log('Fetched data:', data);
       

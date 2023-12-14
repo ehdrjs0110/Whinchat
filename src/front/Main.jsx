@@ -52,8 +52,11 @@ const Main = () => {
         pr: State.pr,
         id: cookies.get('id'),
       };
-  
-      fetch("http://3.36.66.72:4000/Profile", {
+
+      if(cookies.get('id')==null){
+        navigate('/Sign');
+      }else{
+        fetch("http://3.36.66.72:4000/Profile", {
         method: "post",
         headers: {
           "content-type": "application/json",
@@ -80,6 +83,7 @@ const Main = () => {
             message: error.message,
           });
         });
+      }    
     };
 
 
@@ -113,10 +117,9 @@ const Main = () => {
           <li class="item">
             <i class="fa fa-commenting" aria-hidden="true" onClick={handleClick}></i>
           </li>
+          {/* 로그아웃 버튼 */}
           <li class="item" onClick={logout}>
-            <button >  {/* 로그아웃 버튼 */}
-          <i class="fa-solid fa-right-from-bracket fa-2x" aria-hidden="true"></i>
-          </button>
+            <i class="fa-solid fa-right-from-bracket fa-2x" aria-hidden="true"></i>
           </li>
         </ul>
       </nav>
