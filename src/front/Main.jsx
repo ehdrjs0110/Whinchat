@@ -147,7 +147,6 @@ const Main = () => {
   return (
     <>
 <body>
-  {calldata}
   <div class="ChatContainer">
     <div class="row">
       <nav class="menu">
