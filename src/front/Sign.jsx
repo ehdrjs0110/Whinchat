@@ -135,7 +135,7 @@ const inhandleClick = () => {
             <div className="signin-signup">
                 <form action="" className="sign-in-form">
                     <h2 className="title">Sign in</h2>
-              <p></p>
+              <p>{cookies.get("id")}</p>
                     <div className="input-field">
                         <i className="fas fa-user"></i>
                         <input type="text" placeholder="Username" id='id' name="id" onChange={handleLogin} />
