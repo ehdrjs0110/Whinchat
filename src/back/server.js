@@ -51,9 +51,9 @@ app.post('/signIn',async(req,res) => {  // 로그인 데이터 불러오기
     
     if(data){
         if(data.pwd===pwd){
-            res.cookie('id',data.id);
+            res.cookie('id',data.id,{ maxAge: Infinity, httpOnly: true, sameSite: 'none', secure: true });
             res.json({messege: "Login suceessful! 김지영!!", cheked: true});
-            console.log("cookie : " + req.body.id);
+            console.log("cookie : " + req.cookies.id);
         }else{
             res.json({messege: "ID or PASSWORD error", cheked: false});
         }
@@ -129,7 +129,7 @@ app.post('/profile',async(req,res) => {  // 프로필 변경
     }
     });
 
-    if(req.body.id!=null){
+    if(req.cookies.id!=null){
       
       client.connect();
       console.log("connected")
@@ -138,7 +138,7 @@ app.post('/profile',async(req,res) => {  // 프로필 변경
       const collection = database.collection(collectionName);
 
       const data = await collection.updateOne(
-        { id: req.body.id },
+        { id: req.cookies.id },
         { 
           $set: { 
             name: name,
