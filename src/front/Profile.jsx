@@ -19,7 +19,7 @@ function Profile() {
       pr: State.pr,
     };
 
-    fetch("http://localhost:4000/Profile", {
+    fetch("http://3.36.66.72:4000/Profile", {
       method: "post",
       headers: {
         "content-type": "application/json",
