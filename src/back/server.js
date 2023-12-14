@@ -55,9 +55,9 @@ app.post('/signIn',async(req,res) => {  // 로그인 데이터 불러오기
     
     if(data){
         if(data.pwd===pwd){
-            res.cookie('idd',data.id,{ maxAge: 900000, httpOnly: true });
+            res.cookie('id',data.id,{ maxAge: 900000, httpOnly: true });
             res.json({messege: "Login suceessful!", cheked: true});
-            console.log("cookie : " + req.cookies.idd);
+            console.log("cookie : " + req.cookies.id);
         }else{
             res.json({messege: "ID or PASSWORD error", cheked: false});
         }
