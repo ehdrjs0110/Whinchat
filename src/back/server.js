@@ -106,10 +106,11 @@ app.post('/signUp', async (req, res) => { // 회원가입 데이터 불러오기
 app.post('/profile',async(req,res) => {  // 프로필 변경
 
   try{
-    const {name,pr} = req.body;
+    const {name,pr,id} = req.body;
 
     console.log(req.body.name)
     console.log(req.body.pr)
+    console.log(req.body.id)
 
     const { MongoClient, ServerApiVersion } = require('mongodb');
     const uri = "mongodb://127.0.0.1:16045";
@@ -126,7 +127,7 @@ app.post('/profile',async(req,res) => {  // 프로필 변경
     }
     });
 
-    if(req.cookies.id!=null){
+    if(id!=null){
       
       client.connect();
       console.log("connected")
@@ -135,7 +136,7 @@ app.post('/profile',async(req,res) => {  // 프로필 변경
       const collection = database.collection(collectionName);
 
       const data = await collection.updateOne(
-        { id: req.cookies.id },
+        { id: id },
         { 
           $set: { 
             name: name,

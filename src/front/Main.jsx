@@ -33,6 +33,51 @@ const Main = () => {
       navigate('/Sign');
     }
 
+    //프로필 변경
+
+    const handleProfile = (e) => {
+      setState({
+        ...State,
+        [e.target.name]: e.target.value,
+      });
+    };
+
+    const submitProfile = () => {
+      const post = {
+        name: State.name,
+        pr: State.pr,
+        id: cookies.get('id'),
+      };
+  
+      fetch("http://3.36.66.72:4000/Profile", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(post),
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          if (json.cheked == true)
+          {
+            alert("프로필 변경 성공")
+  
+          } else{
+            alert("프로필 변경 실패")
+          }      
+          setState({
+            ...State,
+            message: json.message,
+          });
+        })
+        .catch((error) => {
+          setState({
+            ...State,
+            message: error.message,
+          });
+        });
+    };
+
 
     const navigate = useNavigate();
 
@@ -83,14 +128,14 @@ const Main = () => {
 
               <div className="main-input-field">
                   <i className="fas fa-user"></i>
-                  <input type="text" placeholder="닉네임을 입력하세요." required/>
+                  <input type="text" placeholder="닉네임을 입력하세요." onChange={handleProfile} required/>
               </div>
 
               <div className="main-input-field2">
                   <i className="fas fa-file"></i>
-                  <input type="text" placeholder="자기소개를 적어주세요."/>
+                  <input type="text" placeholder="자기소개를 적어주세요." onChange={handleProfile}/>
               </div>
-                <button class="btn-btn-primary" type="button">제출</button>
+                <button class="btn-btn-primary" type="button" onClick={submitProfile}>제출</button>
                 </div>
             </div>
         </div>
