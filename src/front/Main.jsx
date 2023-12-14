@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './css/Main.css';
+import '../css/Main.css';
 import {Cookies} from 'react-cookie';
 
 
