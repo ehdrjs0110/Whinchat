@@ -12,6 +12,10 @@ const Main = () => {
     const callname = "", callpr = ""; 
 
     function calldata(){
+      const post = {
+        id: cookies.get('id'),
+      };
+
       if(cookies.get('id')==null){
         navigate('/Sign');
       }else{
@@ -20,7 +24,7 @@ const Main = () => {
           headers: {
             "content-type": "application/json",
           },
-          body: JSON.stringify(cookies.get('id')),
+          body: JSON.stringify(post),
         })
           .then((res) => res.json())
           .then((json) => {
