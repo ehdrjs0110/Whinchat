@@ -10,7 +10,7 @@ const Main = () => {
     const inputRef = useRef(null);
 
     const callname = "", callpr = ""; 
-
+    calldata();
     function calldata(){
       const post = {
         id: cookies.get('id'),
@@ -32,6 +32,7 @@ const Main = () => {
             {
               callname = json.name;
               callpr = json.pr
+              console.log(callname + " " + callpr);
             } else{
               alert("프로필 가져오기 실패")
             }      
@@ -143,7 +144,6 @@ const Main = () => {
   return (
     <>
 <body>
-  {calldata}
   <div class="ChatContainer">
     <div class="row">
       <nav class="menu">
