@@ -141,7 +141,7 @@ app.post('/profile',async(req,res) => {  // 프로필 변경
         name = profileData.name;
       }else if(pr==""){
         pr = profileData.pr;
-      }else{
+      }
         const data = await collection.updateOne(
           { id: id },
           { 
@@ -150,7 +150,7 @@ app.post('/profile',async(req,res) => {  // 프로필 변경
               pr : pr
          }}
         )
-      }
+      
 
       
   
