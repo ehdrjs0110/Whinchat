@@ -64,8 +64,8 @@ const Main = () => {
           <li class="item">
             <i class="fa fa-commenting" aria-hidden="true" onClick={handleClick}></i>
           </li>
-          <li class="item">
-            <button onClick={logout}>  {/* 로그아웃 버튼 */}
+          <li class="item" onClick={logout}>
+            <button >  {/* 로그아웃 버튼 */}
           <i class="fa-solid fa-right-from-bracket fa-2x" aria-hidden="true"></i>
           </button>
           </li>
