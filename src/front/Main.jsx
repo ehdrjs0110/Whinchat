@@ -11,37 +11,40 @@ const Main = () => {
 
     const callname = "", callpr = ""; 
 
-    if(cookies.get('id')==null){
-      navigate('/Sign');
-    }else{
-    fetch("http://3.36.66.72:4000/Call", {
-        method: "post",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(cookies.get('id')),
-      })
-        .then((res) => res.json())
-        .then((json) => {
-          if (json.cheked == true)
-          {
-            callname = json.name;
-            callpr = json.pr
-          } else{
-            alert("프로필 가져오기 실패")
-          }      
-          setState({
-            ...State,
-            message: json.message,
-          });
+    function calldata(){
+      if(cookies.get('id')==null){
+        navigate('/Sign');
+      }else{
+      fetch("http://3.36.66.72:4000/Call", {
+          method: "post",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(cookies.get('id')),
         })
-        .catch((error) => {
-          setState({
-            ...State,
-            message: error.message,
+          .then((res) => res.json())
+          .then((json) => {
+            if (json.cheked == true)
+            {
+              callname = json.name;
+              callpr = json.pr
+            } else{
+              alert("프로필 가져오기 실패")
+            }      
+            setState({
+              ...State,
+              message: json.message,
+            });
+          })
+          .catch((error) => {
+            setState({
+              ...State,
+              message: error.message,
+            });
           });
-        });
-      }
+        }
+    }
+    
 
     const handleAvatarClick = () => {
       // If not editing avatar, trigger file input click
@@ -136,6 +139,7 @@ const Main = () => {
   return (
     <>
 <body>
+  {calldata()}
   <div class="ChatContainer">
     <div class="row">
       <nav class="menu">
