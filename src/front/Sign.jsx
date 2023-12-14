@@ -32,42 +32,50 @@ function Sign() {
   };
 
   const submitId2 = () => {
-    const post = {
-      id: signState.id,
-      pwd: signState.pwd,
-    };
 
-    console.log('Request Body:', signState.id);  // 클라이언트 콘솔 로그 추가
-
-    fetch("http://3.36.66.72:4000/SignUp", {
-      method: "post",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(post),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        console.log('Server Response:', json);  // 클라이언트 콘솔 로그 추가
-        if (json.success == true)
-        {
-          alert("회원가입 성공");
-
-        } else{
-          alert("다시 입력해주세요.")
-        }      
-        setSignState({
-          ...signState,
-          message: json.message,
-        });
+    if(signState.id=="" || signState.pwd=="" || signState.pwd_r==""){
+      alert("아이디 또는 비밀번호를 입력하세요.");
+    }else if(signState.pwd != signState.pwd_r){
+      alert("비밀번호가 일치하지 않습니다.");
+    }else{
+      const post = {
+        id: signState.id,
+        pwd: signState.pwd,
+      };
+  
+      console.log('Request Body:', signState.id);  // 클라이언트 콘솔 로그 추가
+  
+      fetch("http://3.36.66.72:4000/SignUp", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(post),
       })
-      .catch((error) => {
-        console.error('Fetch Error:', error);  // 클라이언트 콘솔 로그 추가
-        setSignState({
-          ...signState,
-          message: error.message,
+        .then((res) => res.json())
+        .then((json) => {
+          console.log('Server Response:', json);  // 클라이언트 콘솔 로그 추가
+          if (json.success == true)
+          {
+            alert("회원가입 성공");
+  
+          } else{
+            alert("다시 입력해주세요.")
+          }      
+          setSignState({
+            ...signState,
+            message: json.message,
+          });
+        })
+        .catch((error) => {
+          console.error('Fetch Error:', error);  // 클라이언트 콘솔 로그 추가
+          setSignState({
+            ...signState,
+            message: error.message,
+          });
         });
-      });
+    }
+    
   }
 
   const handleLogin = (e) => {
@@ -78,40 +86,46 @@ function Sign() {
   };
 
   const submitId = () => {
-    const post = {
-      id: loginState.id,
-      pwd: loginState.pwd,
-    };
 
-    fetch("http://3.36.66.72:4000/SignIn", {
-      method: "post",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(post),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.cheked == true)
-        {
-          //alert("로그인 성공")
-          //세션 설정
-          cookies.set("id",loginState.id);
-          navigate('/Main');
-        } else{
-          alert("아이디 또는 비밀번호가 틀렸습니다.")
-        }      
-        setLoginState({
-          ...loginState,
-          message: json.message,
-        });
+    if(loginState.id=="" || loginState.pwd==""){
+      alert("아이디, 비밀번호를 입력하세요.");
+    }else{
+      const post = {
+        id: loginState.id,
+        pwd: loginState.pwd,
+      };
+  
+      fetch("http://3.36.66.72:4000/SignIn", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(post),
       })
-      .catch((error) => {
-        setLoginState({
-          ...loginState,
-          message: error.message,
+        .then((res) => res.json())
+        .then((json) => {
+          if (json.cheked == true)
+          {
+            //alert("로그인 성공")
+            //세션 설정
+            cookies.set("id",loginState.id);
+            navigate('/Main');
+          } else{
+            alert("아이디 또는 비밀번호가 틀렸습니다.")
+          }      
+          setLoginState({
+            ...loginState,
+            message: json.message,
+          });
+        })
+        .catch((error) => {
+          setLoginState({
+            ...loginState,
+            message: error.message,
+          });
         });
-      });
+    }
+    
   };
 
 // ------------------------------------------------------------------------------------------
@@ -172,7 +186,7 @@ const inhandleClick = () => {
                     </div>
                     <div className="input-field">
                         <i className="fas fa-lock"></i>
-                        <input type="password" placeholder="Re_Password" />
+                        <input type="password" name='pwd_r' id='pwd_r' placeholder="Re_Password" onChange={handleSign} />
                     </div>
                     <input type="button" value="Sign up" className="btn solid" onClick={submitId2}/>
 
