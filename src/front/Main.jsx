@@ -9,7 +9,7 @@ const Main = () => {
     const [isEditingAvatar, setIsEditingAvatar] = useState(false);
     const inputRef = useRef(null);
 
-    const callname = "", callpr = ""; 
+    var callname = "", callpr = ""; 
 
     const calldata = () => {
       const post = {
