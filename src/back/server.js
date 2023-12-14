@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require("cors");
 const mongoose = require('mongoose');
-var cookieParser = require('cookie-parser');
 
 const app = express();
 const port = 4000;
@@ -12,7 +11,6 @@ const User = mongoose.model('collection',{
 });
 
 
-app.use(cookieParser());
 app.use(express.json()); // 수정: 함수 호출
 app.use(express.urlencoded({extended: false}))
 app.use(cors())
@@ -52,9 +50,7 @@ app.post('/signIn',async(req,res) => {  // 로그인 데이터 불러오기
     
     if(data){
         if(data.pwd===pwd){
-            res.cookie('id',data.id,{ maxAge: 900000, httpOnly: true });
             res.json({messege: "Login suceessful!", cheked: true});
-            console.log("cookie : " + req.cookies.id);
         }else{
             res.json({messege: "ID or PASSWORD error", cheked: false});
         }
@@ -171,11 +167,8 @@ app.post('/logout',async(req,res) => {  // 프로필 변경
 
   try{
 
-    const out = res.clearCookie("id");
-
     if(out){ 
       res.json({messege: "로그아웃 완료", cheked: true});
-      console.log("cookie : " + req.body.id)
     }else{
       res.json({messege: "로그아웃 실패", cheked: false});
     }
