@@ -9,9 +9,12 @@ const Main = () => {
     const [isEditingAvatar, setIsEditingAvatar] = useState(false);
     const inputRef = useRef(null);
 
-    var callname = "", callpr = ""; 
+    const [callname, setCallname] = useState("");
+    const [callpr, setCallpr] = useState("");
 
-    const calldata = () => {
+    useEffect( () => {
+      
+    // const calldata = () => {
       const post = {
         id: cookies.get('id'),
       };
@@ -30,9 +33,8 @@ const Main = () => {
           .then((json) => {
             if (json.cheked == true)
             {
-              callname = json.name;
-              callpr = json.pr
-              alert(callname);
+              setCallname(json.name);
+              setCallpr(json.pr);
             } else{
               alert("프로필 가져오기 실패")
             }      
@@ -48,7 +50,8 @@ const Main = () => {
             });
           });
         }
-    }
+    // }
+  }, [callname, callpr])
     
 
     const handleAvatarClick = () => {
