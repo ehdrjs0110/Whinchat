@@ -6,11 +6,43 @@ import {Cookies} from 'react-cookie';
 const cookies = new Cookies();
 
 const Main = () => {
-
-  
     const [isEditingAvatar, setIsEditingAvatar] = useState(false);
     const inputRef = useRef(null);
-  
+
+    const callname = "", callpr = ""; 
+
+    if(cookies.get('id')==null){
+      navigate('/Sign');
+    }else{
+    fetch("http://3.36.66.72:4000/Call", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(cookies.get('id')),
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          if (json.cheked == true)
+          {
+            callname = json.name;
+            callpr = json.pr
+          } else{
+            alert("프로필 가져오기 실패")
+          }      
+          setState({
+            ...State,
+            message: json.message,
+          });
+        })
+        .catch((error) => {
+          setState({
+            ...State,
+            message: error.message,
+          });
+        });
+      }
+
     const handleAvatarClick = () => {
       // If not editing avatar, trigger file input click
       if (!isEditingAvatar && inputRef.current) {
@@ -135,12 +167,12 @@ const Main = () => {
 
               <div className="main-input-field">
                   <i className="fas fa-user"></i>
-                  <input type="text" placeholder="닉네임을 입력하세요." id='name' name='name' onChange={handleProfile} required/>
+                  <input type="text" placeholder="닉네임을 입력하세요." id='name' name='name' onChange={handleProfile} value={callname} required/>
               </div>
 
               <div className="main-input-field2">
                   <i className="fas fa-file"></i>
-                  <input type="text" placeholder="자기소개를 적어주세요." id='pr' name='pr' onChange={handleProfile}/>
+                  <input type="text" placeholder="자기소개를 적어주세요." id='pr' name='pr' onChange={handleProfile} value={callpr}/>
               </div>
                 <button class="btn-btn-primary" type="button" onClick={submitProfile}>제출</button>
                 </div>

@@ -15,6 +15,54 @@ app.use(express.json()); // 수정: 함수 호출
 app.use(express.urlencoded({extended: false}))
 app.use(cors())
 
+app.post('/call',async(req,res) => {  // 디비 저장 값 가져오기
+
+  try{
+    const {id} = req.body;
+
+    console.log(req.body.id)
+
+    const { MongoClient, ServerApiVersion } = require('mongodb');
+    const uri = "mongodb://127.0.0.1:16045";
+
+    // 데이터베이스와 컬렉션 이름
+    const dbName = 'whinchat';
+    const collectionName = 'member';
+
+    const client = new MongoClient(uri, {
+    serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+    }
+    });
+ 
+    client.connect();
+    console.log("connected")
+
+    const database = client.db(dbName);
+    const collection = database.collection(collectionName);
+
+    const data = await collection.findOne({ id: id });
+    console.log('Fetched data:', data);
+    
+    if(data){
+        if(data.pwd===pwd){
+            res.json({name: data.name, pr: data.pr , cheked: true});
+        }else{
+            res.json({messege: "ID or PASSWORD error", cheked: false});
+        }
+    }else{
+        res.json({messege: "ID or PASSWORD error", cheked: false});
+    }
+    client.close();
+    console.log('Connection closed');
+  }catch(err){
+    console.log("req : " + req.body)
+    console.error(err);
+  }
+    
+} );
 
 app.post('/signIn',async(req,res) => {  // 로그인 데이터 불러오기
 
