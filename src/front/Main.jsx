@@ -34,6 +34,10 @@ const Main = () => {
     }
 
     //프로필 변경
+    const [State, setState] = useState({
+      name: "",
+      pr: "",
+    });
 
     const handleProfile = (e) => {
       setState({
