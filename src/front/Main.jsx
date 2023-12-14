@@ -30,7 +30,7 @@ const Main = () => {
     //로그아웃
     const logout = () => {
       cookies.remove('id');
-      navigate('/Main');
+      navigate('/Sign');
     }
 
 
