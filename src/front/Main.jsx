@@ -10,8 +10,8 @@ const Main = () => {
     const inputRef = useRef(null);
 
     const callname = "", callpr = ""; 
-    calldata();
-    function calldata(){
+
+    const calldata = () => {
       const post = {
         id: cookies.get('id'),
       };
@@ -144,6 +144,7 @@ const Main = () => {
   return (
     <>
 <body>
+  {calldata}
   <div class="ChatContainer">
     <div class="row">
       <nav class="menu">
