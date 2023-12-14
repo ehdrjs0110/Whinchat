@@ -47,11 +47,7 @@ app.post('/call',async(req,res) => {  // 디비 저장 값 가져오기
     console.log('Fetched data:', data);
     
     if(data){
-        if(data.pwd===pwd){
-            res.json({name: data.name, pr: data.pr , cheked: true});
-        }else{
-            res.json({messege: "ID or PASSWORD error", cheked: false});
-        }
+      res.json({name: data.name, pr: data.pr , cheked: true});  
     }else{
         res.json({messege: "ID or PASSWORD error", cheked: false});
     }
