@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import '../css/Main.css';
 import {Cookies} from 'react-cookie';
 
+const cookies = new Cookies();
 
 const Main = () => {
-  const cookies = new Cookies();
+
   
     const [isEditingAvatar, setIsEditingAvatar] = useState(false);
     const inputRef = useRef(null);
