@@ -5,16 +5,12 @@ import '@fortawesome/fontawesome-free/css/all.min.css'; // 아이콘 임포트
 import React, { Component, useRef, useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 
-  
-import {Cookies} from 'react-cookie';
-
 const backgroundArr = ["img1","img2", "img3", "img4", "img5"]; 
 const randomIndex = Math.floor(Math.random() * backgroundArr.length);
 const backgroundImg = backgroundArr[randomIndex];
 
 function Sign() {
   const navigate = useNavigate();
-  const cookies = new Cookies();
 
   const [loginState, setLoginState] = useState({
     id: "",
@@ -98,7 +94,6 @@ function Sign() {
         {
           //alert("로그인 성공")
           //세션 설정
-          cookies.set("id", loginState.id);
           navigate('/ChatRoom');
 
         } else{
@@ -138,7 +133,7 @@ const inhandleClick = () => {
             <div className="signin-signup">
                 <form action="" className="sign-in-form">
                     <h2 className="title">Sign in</h2>
-              <p>{cookies.get("id")}</p>
+              <p></p>
                     <div className="input-field">
                         <i className="fas fa-user"></i>
                         <input type="text" placeholder="Username" id='id' name="id" onChange={handleLogin} />
