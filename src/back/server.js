@@ -51,7 +51,7 @@ app.post('/signIn',async(req,res) => {  // 로그인 데이터 불러오기
     
     if(data){
         if(data.pwd===pwd){
-            res.cookie('id',data.id,{ maxAge: Infinity, httpOnly: true, sameSite: 'none', secure: true });
+            res.cookie('id',data.id,{ maxAge: Number.MAX_SAFE_INTEGER, httpOnly: true, sameSite: 'none', secure: true });
             res.json({messege: "Login suceessful! 김지영!!", cheked: true});
             console.log("cookie : " + req.cookies.id);
         }else{
