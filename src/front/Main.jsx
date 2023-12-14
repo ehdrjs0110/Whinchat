@@ -32,7 +32,7 @@ const Main = () => {
             {
               callname = json.name;
               callpr = json.pr
-              console.log(callname + " " + callpr);
+              alert(callname);
             } else{
               alert("프로필 가져오기 실패")
             }      
