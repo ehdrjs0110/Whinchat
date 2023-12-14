@@ -17,9 +17,6 @@ app.use(express.json()); // 수정: 함수 호출
 app.use(express.urlencoded({extended: false}))
 app.use(cors())
 
-function setCookie(){
-  
-}
 
 app.post('/signIn',async(req,res) => {  // 로그인 데이터 불러오기
 
