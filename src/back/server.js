@@ -167,7 +167,7 @@ app.post('/logout',async(req,res) => {  // 프로필 변경
 
   try{
 
-    if(out){ 
+    if(req.body!=null){ 
       res.json({messege: "로그아웃 완료", cheked: true});
     }else{
       res.json({messege: "로그아웃 실패", cheked: false});
