@@ -178,12 +178,12 @@ const Main = () => {
 
               <div className="main-input-field">
                   <i className="fas fa-user"></i>
-                  <input type="text" placeholder="닉네임을 입력하세요." id='name' name='name' onChange={handleProfile} value={callname} required/>
+                  <input type="text" placeholder={ callname || "닉네임을 입력하세요."} id='name' name='name' onChange={handleProfile} required/>
               </div>
 
               <div className="main-input-field2">
                   <i className="fas fa-file"></i>
-                  <input type="text" placeholder="자기소개를 적어주세요." id='pr' name='pr' onChange={handleProfile} value={callpr}/>
+                  <input type="text" placeholder={ callpr || "자기소개를 적어주세요." } id='pr' name='pr' onChange={handleProfile} />
               </div>
                 <button class="btn-btn-primary" type="button" onClick={submitProfile}>제출</button>
                 </div>
