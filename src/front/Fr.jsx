@@ -1,13 +1,13 @@
-
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef , useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import './Chat.css';
 import {Cookies} from 'react-cookie';
-const cookies = new Cookies();
 
-const Chat = () => {
 
+const Fr = () => {
+  const cookies = new Cookies();
+    
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -19,7 +19,6 @@ const Chat = () => {
     const fhandleClick = () => {
       navigate('/fr');
     }
-  
 
     const [robotColor, setRobotColor] = useState('#000');
     const [writeMessageBorderColor, setWriteMessageBorderColor] = useState('#000');
@@ -27,39 +26,7 @@ const Chat = () => {
     function toggleRobotColor() {
         setRobotColor((prevColor) => (prevColor === '#000' ? '#3b6ff3' : '#000'));
         setWriteMessageBorderColor('#3b6ff3');
-
-        
-        
       }
-
-      const [answer, setAnser] = useState("");
-
-      const getGPTsQuery = () => {
-
-        // var gpt_q = document.getElementById("gpt_q").value;
-        var gpt_q = inputMessage.current.value;
-
-        const url = 'http://localhost:3001/gpt';
-        const gpt_q_json = {query: gpt_q};
-        
-        if (gpt_q_json.gpt_q !== "" && gpt_q_json.gpt_category !== "") {
-            const options = {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(gpt_q_json)
-              };
-    
-              fetch(url, options)
-              .then(response => response.text())
-              .then(data => {
-                console.log(data);
-                setAnser(data)})
-              .catch(error => console.error('Error:', error));
-              
-            }
-        };
 
       const [modalOpen, setModalOpen] = useState(false);
       const modalBackground = useRef();
@@ -68,46 +35,38 @@ const Chat = () => {
     // -----------------------------------------------------------------------
     const [test, setTest] = useState();
 
-    var socket = io.connect('http://localhost:8088', 
-    {transports: ['websocket']});
+  var socket = io.connect('http://localhost:8088', 
+  {transports: ['websocket']});
 
-    // let roomId, roomName, memberId;
-    const [roomId, setRoomId] = useState();
-    const [roomName, setRoomName] = useState();
-    const [memberId, setMemberId] = useState();
+  // let roomId, roomName, memberId;
+  const [roomId, setRoomId] = useState();
+  const [roomName, setRoomName] = useState();
+  const [memberId, setMemberId] = useState(cookies.get('id'));
 
-    //room, friends
-    const [listRoom, setListRoom] = useState([]);
-    const [listFriends, setListFriends] = useState([]);
-    const [listFriendsIndex, setListFriendsIndex] = useState([]);
-    const [room, setRoom] = useState(null);
-    const [member, setMember] = useState({});
-    const [inviteMember, setInviteMember] = useState([]);
+  //room, friends
+  const [listRoom, setListRoom] = useState([]);
+  const [listFriends, setListFriends] = useState([]);
+  const [listFriendsIndex, setListFriendsIndex] = useState([]);
+  const [room, setRoom] = useState(null);
+  const [member, setMember] = useState({});
+  const [inviteMember, setInviteMember] = useState([]);
 
-    //room
-    // const [time, setTime] = useState([]);
-    // const [sender, setSender] = useState([]);
-    // const [content, setContent] = useState([]);
-    
-    //input
-    const inputId = useRef();
-    const inputMessage = useRef();
-    const inputFriendId = useRef();
+  //room
+  // const [time, setTime] = useState([]);
+  // const [sender, setSender] = useState([]);
+  // const [content, setContent] = useState([]);
+  
+  //input
+  const inputId = useRef();
+  const inputMessage = useRef();
+  const inputFriendId = useRef();
 
-    //div
-    // const chatDiv = useRef();
-    // const memberDiv = useRef();
-    // const friendsDiv = useRef();
-
-
+  //div
+  // const chatDiv = useRef();
+  // const memberDiv = useRef();
+  // const friendsDiv = useRef();
 
 
-
-
-  //로그아웃
-  // const logout = () => {
-  //   cookies.remove('id');
-  // }
 
   //채팅방 socket 연결 해야함
   const loadRoom = (room_id, room_name) => {
@@ -129,19 +88,14 @@ const Chat = () => {
       console.log('Category Data:', data);
       setRoom(data.room);
       setMember(data.member);
-      console.log(data.inviteMember);
-      setInviteMember(data.inviteMember);
+      inviteMap();
     })
     .catch(error => console.error('Error:', error));
-    
-    // inviteMap();
+
     socket.emit('loadRoom', room_id);
   }
   
-  
-  
-  // useEffect( () => {
-    // cookies.set("id","wodysl");
+  // const login = () => {
     const login = () => {
       const member_id = inputId.current.value;
       setMemberId(member_id);
@@ -179,15 +133,15 @@ const Chat = () => {
       })
       .catch(error => console.error('Error:', error));
     }
-    // }, [memberId])
-    
-    const friend = async (data) => {
-      // alert(memberId);
-      let friendId;
-      
+
+  const friend = async (data) => {
+    // alert(memberId);
+    let friendId;
+
     let url = 'http://localhost:3001/friend';
 
     if(data.type === "add"){
+      // alert("add");
       url += "Add";
       friendId = inputFriendId.current.value;
     }
@@ -251,22 +205,12 @@ const Chat = () => {
     const url = 'http://localhost:3001/joinRoom';
     let room_id;
 
-    //checkbox 표시
-    const checkId = [];
-    for(var i=0 ; i<listFriends.length ; i++){
-      const str = "friend" + i;
-      const checkBtn = document.getElementById(str);
-      if(checkBtn.checked){
-        checkId[i] = checkBtn.value;
-      }
-    }
-
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({memberId: memberId, checkId: checkId})
+      body: JSON.stringify({memberId: memberId})
     };
 
     fetch(url, options)
@@ -284,9 +228,9 @@ const Chat = () => {
 
       setRoom(data.room);
       setMember(data.member);
+      inviteMap();
     })
     .catch(error => console.error('Error:', error));
-
     socket.emit('loadRoom',room_id);
   }
 
@@ -302,7 +246,6 @@ const Chat = () => {
 
   //join, load
   const inviteMap = () => {
-    // alert("invite");
     let temp = member.friends.id;
     
     for(var i=0 ; i<room.id.length ; i++){
@@ -324,7 +267,7 @@ const Chat = () => {
   // }
   function invite(){
     const checkBtn = document.querySelectorAll(".checkBtn");
-    alert(checkBtn.length);
+    // alert(checkBtn.length);
     const flag = [];
     const idList = [];
     for(var i=0 ; i<checkBtn.length ; i++){
@@ -335,7 +278,7 @@ const Chat = () => {
             idList[i] = checkBtn[i].value;
         }
     }
-    alert(roomId);
+    // alert(roomId);
     //socket.emit('invite', {flag:flag, id:memberId, roomId:roomId, roomName: roomName});
     socket.emit('invite', {idList:idList, id:memberId, roomId:roomId, roomName: roomName});
   }
@@ -363,34 +306,35 @@ const Chat = () => {
   socket.on('load', (data) => {
     // alert(data);
   });
-  
+
+  //로그아웃
+  const logout = () => {
+    cookies.remove('id');
+  }
 
   return (
     <>
 <body>
-  
   <div class="ChatContainer">
-    {/* <button onClick={login}>버튼</button> */}
-    
+  {/* <button onClick={login}>버튼</button> */}
     <div class="row">
-
     <nav class="menu">
         <ul class="items">
           <li class="item">
             <i class="fa fa-home" aria-hidden="true" onClick={mhandleClick}></i>
           </li>
-          <li class="item">
+          <li class="item item-active">
             <i class="fa fa-user" aria-hidden="true" onClick={fhandleClick}>
             </i>
           </li>
           <li class="item">
-            <i class="fa fa-pencil" aria-hidden="true" onClick={() => setModalOpen(true)}></i>
+            <i class="fa fa-pencil" aria-hidden="true"onClick={() => setModalOpen(true)}></i>
           </li>
-          <li class="item item-active">
+          <li class="item">
             <i class="fa fa-commenting" aria-hidden="true" onClick={handleClick}></i>
           </li>
           <li class="item">
-            <button> 
+            <button onClick={logout}>  {/* 로그아웃 버튼 */}
           <i class="fa-solid fa-right-from-bracket fa-2x" aria-hidden="true"></i>
           </button>
           </li>
@@ -407,6 +351,7 @@ const Chat = () => {
             <p>친구 목록</p>
             <div className="friends">
               {/* 친구 목록 출력 */}
+              
               {listFriends != null &&
               listFriends.map((friends, index) => (
                 <div key={friends.id}>
@@ -420,88 +365,83 @@ const Chat = () => {
                 </div>
               ))
             }
+              {/* 이외의 버튼도 frends 박스 안에 넣으삼 */}
             </div>
             <button className='modal-close-btn' onClick={() => setModalOpen(false)}>닫기</button>
             <button className='modal-close-btn' onClick={joinRoom}>방 생성</button>  {/* 초대랑 삭제버튼은 없애고 위에 친구 목록 출력 안에 넣으삼 */}
-            {/* <button className="">삭제</button> */}
+            {/* <button className={'modal-close-btn'} onClick={() => setModalOpen(false)}>닫기</button> */}
           </div>
         </div>
-        
       }
       <section class="discussions">
       id : <input type="text" id="memberId" ref={inputId}/>
       <button onClick={login}>로그인</button>
         <div class="discussion search">
           <div class="searchbar">
-            <button>  {/* 채팅방 검색 */}
+            <button onClick={() => friend({type:"add"})}>  {/* 친구 추가 */}
             <i class="fa fa-search" aria-hidden="true"></i>
             </button>
-            <input type="text" id="chatsearch" placeholder="검색"></input>
+            <input type="text" id="friendId"  ref={inputFriendId} placeholder="추가할 아이디 입력"/>
           </div>
         </div>
-
-          {/* 채팅방 목록 출력 */}
-        {listRoom != null &&
-          listRoom.map((room) => (
-            <div class="discussion message" key={room.id}>
-              <button id="chatBtn" onClick={() => loadRoom(room.id, room.name)}>{room.name}</button>
+        {/* <div class="discussion message"> */}
+          {/* 친구 목록 출력 */}
+          
+        {/* </div> */}
+        {listFriends != null &&
+          listFriends.map((friends) => (
+            <div key={friends.id} class="discussion_message">
+              <div className="chatroom">
+                <span><strong>{friends.name}</strong></span>
+                <button onClick={() => friendChat(friends.id)}>채팅</button>
+                <button onClick={() => friend({type:"sub", friendId:friends.id})}>삭제</button>
+                <br/></div>
             </div>
           ))
         }
-        {/* <div class="discussion message">
-          
-        </div> */}
       </section>
 
       <section class="chat">
         <div class="header-chat">
         <button onClick={leaveRoom}>나가기</button>
           <i class="icon fa fa-user-o" aria-hidden="true"></i>
-          <p>채팅방</p>
+          <p class="name" >대화 상대 이름</p>
+          <button>
           <i class="fa fa-xmark fa-2x"></i>
+          </button>
         </div>
-
         <div class="messages-chat">
         {room != null &&
           room.log.map((log) => (
             <p key={log.time}><strong>{log.sender} </strong> [{log.time}] <span>{log.content}</span> </p>
-          ))
-        }
+            ))
+          }
           {/* 대화 내용 출력 */}
-        </div>
-         
-        <div class="footer-chat">
-        <i class="fas fa-plus" id="plusicon" aria-hidden="true"></i>
-          <input type="text" ref={inputMessage} class="write-message" placeholder="메세지를 입력해주세요." style={{ borderColor: writeMessageBorderColor }}/>
-          {robotColor === "#3b6ff3"&&
-            <i onClick={getGPTsQuery} class="fa fa-paper-plane" aria-hidden="true"></i>
-          }
-          {robotColor === "#000"&&
-          <i onClick={sendMessage} class="fa fa-paper-plane" aria-hidden="true"></i>
-
-          }
-          <i class="fas fa-robot" aria-hidden="true" style={{ color: robotColor }} onClick={toggleRobotColor} ></i>
+          {/* id : <input type="text" id="memberId" ref={inputId}/>
+      <button onClick={login}>로그인</button> */}
         </div>
         {/* <div class="footer-chat">
-          <i class="fas fa-plus" id="plusicon" aria-hidden="true"></i> */}
+          <i class="fas fa-plus" id="plusicon" aria-hidden="true"></i>
+          <input type="text" class="write-message" placeholder="메세지를 입력해주세요." style={{ borderColor: writeMessageBorderColor }} ></input>
+          <button onClick={sendMessage}>
+          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+          </button>
+          <i class="fas fa-robot" aria-hidden="true" style={{ color: robotColor }}
+              onClick={toggleRobotColor} ></i>
+        </div> */}
 
-
-          {/* <input type="text" id="message" ref={inputMessage}/>
-      <button onClick={sendMessage}>보내기</button> */}
-
-
-          {/* <input type="text" ref={inputMessage} class="write-message" placeholder="메세지를 입력해주세요." style={{ borderColor: writeMessageBorderColor }}/>
+        <div class="footer-chat">
+          <i class="fas fa-plus" id="plusicon" aria-hidden="true"></i>
+          <input type="text" ref={inputMessage} class="write-message" placeholder="메세지를 입력해주세요." style={{ borderColor: writeMessageBorderColor }}/>
           <i onClick={sendMessage} class="fa fa-paper-plane" aria-hidden="true"></i>
           <i class="fas fa-robot" aria-hidden="true" style={{ color: robotColor }} onClick={toggleRobotColor} ></i>
-        </div> */}
+        </div>
       </section>
     </div>
-      
   </div>
 </body>
-
     </>
   );
 };
 
-export default Chat;
+export default Fr;

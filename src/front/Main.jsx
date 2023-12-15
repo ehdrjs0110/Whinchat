@@ -1,12 +1,32 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
-import './Chat.css';
+import './Main.css';
 import {Cookies} from 'react-cookie';
 const cookies = new Cookies();
 
-const Chat = () => {
+const Main = () => {
+
+    const [isEditingAvatar, setIsEditingAvatar] = useState(false);
+    const inputRef = useRef(null);
+  
+    const handleAvatarClick = () => {
+      // If not editing avatar, trigger file input click
+      if (!isEditingAvatar && inputRef.current) {
+        inputRef.current.click();
+      }
+      // Toggle the editing state
+      setIsEditingAvatar(!isEditingAvatar);
+    };
+  
+    const handleImageChange = (event) => {
+      const file = event.target.files[0];
+      // Handle the selected file as needed
+      console.log('Selected image:', file);
+      // Reset state after handling the image if needed
+      setIsEditingAvatar(false);
+    };
+
 
     const navigate = useNavigate();
 
@@ -27,39 +47,7 @@ const Chat = () => {
     function toggleRobotColor() {
         setRobotColor((prevColor) => (prevColor === '#000' ? '#3b6ff3' : '#000'));
         setWriteMessageBorderColor('#3b6ff3');
-
-        
-        
       }
-
-      const [answer, setAnser] = useState("");
-
-      const getGPTsQuery = () => {
-
-        // var gpt_q = document.getElementById("gpt_q").value;
-        var gpt_q = inputMessage.current.value;
-
-        const url = 'http://localhost:3001/gpt';
-        const gpt_q_json = {query: gpt_q};
-        
-        if (gpt_q_json.gpt_q !== "" && gpt_q_json.gpt_category !== "") {
-            const options = {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(gpt_q_json)
-              };
-    
-              fetch(url, options)
-              .then(response => response.text())
-              .then(data => {
-                console.log(data);
-                setAnser(data)})
-              .catch(error => console.error('Error:', error));
-              
-            }
-        };
 
       const [modalOpen, setModalOpen] = useState(false);
       const modalBackground = useRef();
@@ -68,13 +56,13 @@ const Chat = () => {
     // -----------------------------------------------------------------------
     const [test, setTest] = useState();
 
-    var socket = io.connect('http://localhost:8088', 
+    var socket = io.connect('http://localhost:8080', 
     {transports: ['websocket']});
 
     // let roomId, roomName, memberId;
     const [roomId, setRoomId] = useState();
     const [roomName, setRoomName] = useState();
-    const [memberId, setMemberId] = useState();
+    const [memberId, setMemberId] = useState(cookies.get('id'));
 
     //room, friends
     const [listRoom, setListRoom] = useState([]);
@@ -105,9 +93,9 @@ const Chat = () => {
 
 
   //로그아웃
-  // const logout = () => {
-  //   cookies.remove('id');
-  // }
+  const logout = () => {
+    cookies.remove('id');
+  }
 
   //채팅방 socket 연결 해야함
   const loadRoom = (room_id, room_name) => {
@@ -138,20 +126,19 @@ const Chat = () => {
     socket.emit('loadRoom', room_id);
   }
   
+  // const member_id = inputId.current.value;
+  // setMemberId(member_id);
   
   
-  // useEffect( () => {
-    // cookies.set("id","wodysl");
-    const login = () => {
-      const member_id = inputId.current.value;
-      setMemberId(member_id);
+  useEffect( () => {
+    // const login = () => {
       const url = 'http://localhost:3001/login';
       const options = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({memberId : member_id})
+        body: JSON.stringify({memberId : memberId})
       };
       
       fetch(url, options)
@@ -178,11 +165,11 @@ const Chat = () => {
         }
       })
       .catch(error => console.error('Error:', error));
-    }
-    // }, [memberId])
+    // }
+    }, [memberId])
     
     const friend = async (data) => {
-      // alert(memberId);
+      alert(memberId);
       let friendId;
       
     let url = 'http://localhost:3001/friend';
@@ -291,7 +278,7 @@ const Chat = () => {
   }
 
   const sendMessage = () => {
-    // alert(roomId);
+    alert(roomId);
     socket.emit('sendMessage', { id:memberId, roomId:roomId, message:inputMessage.current.value });
     inputMessage.current.value = null;
   }
@@ -302,7 +289,7 @@ const Chat = () => {
 
   //join, load
   const inviteMap = () => {
-    // alert("invite");
+    alert("invite");
     let temp = member.friends.id;
     
     for(var i=0 ; i<room.id.length ; i++){
@@ -355,28 +342,24 @@ const Chat = () => {
   });
   
   socket.on('message', (data) => {
-    // alert("hhh");
+    alert("hhh");
     setRoom(data.room);
     setListRoom(data.member.room);
   });
 
   socket.on('load', (data) => {
-    // alert(data);
+    alert(data);
   });
-  
 
   return (
     <>
-<body>
-  
+    <body>
+      
   <div class="ChatContainer">
-    {/* <button onClick={login}>버튼</button> */}
-    
     <div class="row">
-
     <nav class="menu">
         <ul class="items">
-          <li class="item">
+          <li class="item item-active">
             <i class="fa fa-home" aria-hidden="true" onClick={mhandleClick}></i>
           </li>
           <li class="item">
@@ -386,11 +369,11 @@ const Chat = () => {
           <li class="item">
             <i class="fa fa-pencil" aria-hidden="true" onClick={() => setModalOpen(true)}></i>
           </li>
-          <li class="item item-active">
+          <li class="item">
             <i class="fa fa-commenting" aria-hidden="true" onClick={handleClick}></i>
           </li>
           <li class="item">
-            <button> 
+            <button onClick={logout}>  {/* 로그아웃 버튼 */}
           <i class="fa-solid fa-right-from-bracket fa-2x" aria-hidden="true"></i>
           </button>
           </li>
@@ -428,80 +411,32 @@ const Chat = () => {
         </div>
         
       }
-      <section class="discussions">
-      id : <input type="text" id="memberId" ref={inputId}/>
-      <button onClick={login}>로그인</button>
-        <div class="discussion search">
-          <div class="searchbar">
-            <button>  {/* 채팅방 검색 */}
-            <i class="fa fa-search" aria-hidden="true"></i>
-            </button>
-            <input type="text" id="chatsearch" placeholder="검색"></input>
-          </div>
-        </div>
+              <div class="card-body">
+                    <img class="mainavatar" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt=""  onClick={handleAvatarClick}/>
+                    <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    style={{ display: 'none' }}
+                    ref={inputRef}
+                  />
 
-          {/* 채팅방 목록 출력 */}
-        {listRoom != null &&
-          listRoom.map((room) => (
-            <div class="discussion message" key={room.id}>
-              <button id="chatBtn" onClick={() => loadRoom(room.id, room.name)}>{room.name}</button>
+              <div className="main-input-field">
+                  <i className="fas fa-user"></i>
+                  <input type="text" placeholder="닉네임을 입력하세요." required/>
+              </div>
+
+              <div className="main-input-field2">
+                  <i className="fas fa-file"></i>
+                  <input type="text" placeholder="자기소개를 적어주세요."/>
+              </div>
+                <button class="btn-btn-primary" type="button">제출</button>
+                </div>
             </div>
-          ))
-        }
-        {/* <div class="discussion message">
-          
-        </div> */}
-      </section>
-
-      <section class="chat">
-        <div class="header-chat">
-        <button onClick={leaveRoom}>나가기</button>
-          <i class="icon fa fa-user-o" aria-hidden="true"></i>
-          <p>채팅방</p>
-          <i class="fa fa-xmark fa-2x"></i>
-        </div>
-
-        <div class="messages-chat">
-        {room != null &&
-          room.log.map((log) => (
-            <p key={log.time}><strong>{log.sender} </strong> [{log.time}] <span>{log.content}</span> </p>
-          ))
-        }
-          {/* 대화 내용 출력 */}
-        </div>
-         
-        <div class="footer-chat">
-        <i class="fas fa-plus" id="plusicon" aria-hidden="true"></i>
-          <input type="text" ref={inputMessage} class="write-message" placeholder="메세지를 입력해주세요." style={{ borderColor: writeMessageBorderColor }}/>
-          {robotColor === "#3b6ff3"&&
-            <i onClick={getGPTsQuery} class="fa fa-paper-plane" aria-hidden="true"></i>
-          }
-          {robotColor === "#000"&&
-          <i onClick={sendMessage} class="fa fa-paper-plane" aria-hidden="true"></i>
-
-          }
-          <i class="fas fa-robot" aria-hidden="true" style={{ color: robotColor }} onClick={toggleRobotColor} ></i>
-        </div>
-        {/* <div class="footer-chat">
-          <i class="fas fa-plus" id="plusicon" aria-hidden="true"></i> */}
-
-
-          {/* <input type="text" id="message" ref={inputMessage}/>
-      <button onClick={sendMessage}>보내기</button> */}
-
-
-          {/* <input type="text" ref={inputMessage} class="write-message" placeholder="메세지를 입력해주세요." style={{ borderColor: writeMessageBorderColor }}/>
-          <i onClick={sendMessage} class="fa fa-paper-plane" aria-hidden="true"></i>
-          <i class="fas fa-robot" aria-hidden="true" style={{ color: robotColor }} onClick={toggleRobotColor} ></i>
-        </div> */}
-      </section>
-    </div>
-      
   </div>
-</body>
-
+    </body>
     </>
   );
 };
 
-export default Chat;
+export default Main;
