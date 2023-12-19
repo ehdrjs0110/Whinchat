@@ -3,6 +3,10 @@ import '@fortawesome/fontawesome-free/css/all.min.css'; // 아이콘 임포트
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
+
+import {Cookies} from 'react-cookie';
+const cookies = new Cookies();
+
 function Sign() {
   const navigate = useNavigate();
   const [loginState, setLoginState] = useState({
@@ -30,7 +34,7 @@ function Sign() {
 
     console.log('Request Body:', signState.id);  // 클라이언트 콘솔 로그 추가
 
-    fetch("http://3.36.66.72:4000/SignUp", {
+    fetch("http://localhost:3001/SignUp", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -74,7 +78,7 @@ function Sign() {
       pwd: loginState.pwd,
     };
 
-    fetch("http://3.36.66.72:4000/SignIn", {
+    fetch("http://localhost:3001/SignIn", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -86,7 +90,8 @@ function Sign() {
         if (json.cheked == true)
         {
           // alert("로그인 성공")
-          navigate('/ChatRoom');
+          cookies.set("id",loginState.id);
+          navigate('/chat');
 
         } else{
           alert("아이디 또는 비밀번호가 틀렸습니다.")
@@ -122,7 +127,7 @@ return (
 <div className={`container ${isSignUpMode ? 'sign-up-mode' : ''}`}>
   <div className="forms-container">
       <div className="signin-signup">
-          <form action="" className="sign-in-form" >
+          <form action="" className="sign-in-form" id="signform">
               <h2 className="title">Sign in</h2>
               <div className="input-field">
                   <i className="fas fa-user"></i>
@@ -148,7 +153,7 @@ return (
               </div>
           </form>
 
-          <form action="" className="sign-up-form" >
+          <form action="" className="sign-up-form" id="signform">
               <h2 className="title">Sign up</h2>
               <div className="input-field">
                   <i className="fas fa-user"></i>
