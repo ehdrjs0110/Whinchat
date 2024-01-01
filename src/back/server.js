@@ -258,7 +258,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
       filename : req.file.filename }}
   );
   const filterCriteria = { id: 'user' };
-  
+  console.log(req.cookie);
   //DB
   const { MongoClient, ServerApiVersion } = require('mongodb');
   const uri = "mongodb://127.0.0.1:16045";
