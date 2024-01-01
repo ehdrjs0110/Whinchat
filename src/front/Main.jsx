@@ -120,7 +120,7 @@ const Main = () => {
     const upload = () => {
       const formData = new FormData();
       formData.append('file', file);
-      // formData.append('file', file);
+      formData.append('cookie', cookies.get('id'));
       axios.post("http://3.36.66.72:4000/upload", formData)
       .then((res) => {
         console.log(res.data);

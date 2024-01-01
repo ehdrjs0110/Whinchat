@@ -257,7 +257,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     { $set: {
       filename : req.file.filename }}
   );
-  const filterCriteria = { id: 'admin' };
+  const filterCriteria = { id: req.cookie };
   
   //DB
   const { MongoClient, ServerApiVersion } = require('mongodb');
