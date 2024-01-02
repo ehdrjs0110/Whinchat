@@ -204,7 +204,7 @@ const Main = () => {
                 type="file" 
                 style={{ display: 'none' }}
                 onChange={(e) => setFile(e.target.files[0])}/>  
-                <button class="btn-btn-primary" type="button" onClick={upload}>프로필 편집</button>
+                <button class="btn-btn-primary" type="button" onClick={upload}>사진 변경</button>
         </form>
 
         <div className="main-input-field">
@@ -215,7 +215,7 @@ const Main = () => {
           <i className="fas fa-file"></i>
           <input type="text" placeholder={ callpr || "자기소개를 적어주세요." } id='pr' name='pr' onChange={handleProfile} />
         </div>
-        <button class="btn-btn-primary" type="button" onClick={submitProfile}>제출</button>
+        <button class="btn-btn-primary" type="button" onClick={submitProfile}>프로필 변경</button>
       </div>
     </div>
   </div>
