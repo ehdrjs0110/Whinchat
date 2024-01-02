@@ -39,6 +39,7 @@ const Main = () => {
             {
               setCallname(json.name);
               setCallpr(json.pr);
+              setFile(json.img);
             } else{
               alert("프로필 가져오기 실패")
             }      
@@ -151,11 +152,12 @@ const Main = () => {
       // Toggle the editing state
       setIsEditingAvatar(!isEditingAvatar);
     };
-    const onChange = e => {
-      setFile(e.target.files[0]);
-      //이미지
-      setIsEditingAvatar(false);
-    };
+
+    // const onChange = e => {
+    //   setFile(e.target.files[0]);
+    //   //이미지
+    //   setIsEditingAvatar(false);
+    // };
 
     const navigate = useNavigate();
 
@@ -195,9 +197,9 @@ const Main = () => {
       </nav>
       <div class="card-body">
         <form class="profile">
-          {uploadedImg ? (
+          {file ? (
             <>
-              <img class="mainavatar" src={uploadedImg.filePath} alt="" onClick={handleAvatarClick} />
+              <img class="mainavatar" src={"/home/ubuntu/project/whinchat/public/proimg/"+file} alt="" onClick={handleAvatarClick} />
                 {/* <h3>{uploadedImg.fileName}</h3> */}
             </>
           ) : (

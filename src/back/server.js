@@ -49,7 +49,7 @@ app.post('/call',async(req,res) => {  // 디비 저장 값 가져오기
     console.log('Fetched data:', data);
     
     if(data){
-      res.json({name: data.name, pr: data.pr , cheked: true});  
+      res.json({name: data.name, pr: data.pr, img: data.filename , cheked: true});  
     }else{
         res.json({messege: "ID or PASSWORD error", cheked: false});
     }
