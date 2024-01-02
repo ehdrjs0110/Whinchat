@@ -257,7 +257,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     { $set: {
       filename : req.file.filename }}
   );
-  const filterCriteria = { id: 'user' };
+  const filterCriteria = { id: req.cookie };
   console.log("쿠키 값이 넘어와? : "+req.cookie);
   //DB
   const { MongoClient, ServerApiVersion } = require('mongodb');
