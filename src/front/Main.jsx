@@ -121,7 +121,8 @@ const Main = () => {
     const upload = () => {
       const formData = new FormData();
       formData.append('file', file);
-      axios.post("http://3.36.66.72:4000/upload", formData, {cookie : cookies.get('id')})
+      formData.append('cookie', cookies.get('id'));
+      axios.post("http://3.36.66.72:4000/upload", formData)
       .then((res) => {
         console.log(res.data);
         fileName = res.data;
@@ -151,11 +152,11 @@ const Main = () => {
       setIsEditingAvatar(!isEditingAvatar);
     };
 
-    const onChange = e => {
-      setFile(e.target.files[0]);
-      //이미지
-      setIsEditingAvatar(false);
-    };
+    // const onChange = e => {
+    //   setFile(e.target.files[0]);
+    //   //이미지
+    //   setIsEditingAvatar(false);
+    // };
 
     const navigate = useNavigate();
 
@@ -202,8 +203,7 @@ const Main = () => {
                 ref={inputRef} 
                 type="file" 
                 style={{ display: 'none' }}
-                onChange={(e) => setFile(e.target.files[0])}/> 
-                <h3>{}</h3>   
+                onChange={(e) => setFile(e.target.files[0])}/>  
                 <button class="btn-btn-primary" type="button" onClick={upload}>프로필 편집</button>
         </form>
 
