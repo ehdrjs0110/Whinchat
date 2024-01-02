@@ -151,11 +151,11 @@ const Main = () => {
       setIsEditingAvatar(!isEditingAvatar);
     };
 
-    // const onChange = e => {
-    //   setFile(e.target.files[0]);
-    //   //이미지
-    //   setIsEditingAvatar(false);
-    // };
+    const onChange = e => {
+      setFile(e.target.files[0]);
+      //이미지
+      setIsEditingAvatar(false);
+    };
 
     const navigate = useNavigate();
 
