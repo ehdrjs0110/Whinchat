@@ -197,7 +197,7 @@ const Main = () => {
       </nav>
       <div class="card-body">
         <form class="profile">
-          {file ? (
+          {(file===undefined) ? (
             <>
               <img class="mainavatar" src={"/home/ubuntu/project/whinchat/public/proimg/"+file} alt="" onClick={handleAvatarClick} />
                 {/* <h3>{uploadedImg.fileName}</h3> */}
