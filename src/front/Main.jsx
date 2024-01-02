@@ -131,7 +131,7 @@ const Main = () => {
           fileName,
           filePath: `http://3.36.66.72:3000/main/${fileName}`,
         });
-        alert(fileName);
+        alert("사진 변경 완료");
       })
       .catch((err) => {
         console.error(err);
