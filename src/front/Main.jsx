@@ -13,6 +13,7 @@ const Main = () => {
     const [callname, setCallname] = useState("");
     const [callpr, setCallpr] = useState("");
     const [file, setFile] = useState("");
+    const [newfile, setnewFile] = useState("");
 
     var fileName = "";
 
@@ -119,24 +120,28 @@ const Main = () => {
 
     //이미지 업로드 변경
     const upload = () => {
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('cookie', cookies.get('id'));
-      axios.post("http://3.36.66.72:4000/upload", formData)
-      .then((res) => {
-        console.log(res.data);
-        fileName = res.data;
-        console.log(fileName);
-        setUploadedImg({
-          fileName,
-          filePath: `http://3.36.66.72:3000/main/${fileName}`,
+      if(newfile!=""){
+        const formData = new FormData();
+        formData.append('file', newfile);
+        formData.append('cookie', cookies.get('id'));
+        axios.post("http://3.36.66.72:4000/upload", formData)
+        .then((res) => {
+          console.log(res.data);
+          fileName = res.data;
+          console.log(fileName);
+          setUploadedImg({
+            fileName,
+            filePath: `http://3.36.66.72:3000/main/${fileName}`,
+          });
+          alert("사진 변경 완료");
+        })
+        .catch((err) => {
+          console.error(err);
+          alert('프로필 편집 실패');
         });
-        alert("사진 변경 완료");
-      })
-      .catch((err) => {
-        console.error(err);
-        alert('프로필 편집 실패');
-      });
+      }else{
+        alert('사진을 선택해주세요!');
+      }
     }
     const [uploadedImg, setUploadedImg] = useState({
         fileName: "",
@@ -203,7 +208,7 @@ const Main = () => {
                 ref={inputRef} 
                 type="file" 
                 style={{ display: 'none' }}
-                onChange={(e) => setFile(e.target.files[0])}/>  
+                onChange={(e) => setnewFile(e.target.files[0])}/>  
                 <button class="btn-btn-primary" type="button" onClick={upload}>사진 변경</button>
         </form>
 
