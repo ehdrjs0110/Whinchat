@@ -134,7 +134,7 @@ const Main = () => {
             filePath: `http://43.201.98.98:3000/main/${fileName}`,
           });
           alert("사진 변경 완료");
-          location.reload();
+          window.location.reload();
         })
         .catch((err) => {
           console.error(err);
