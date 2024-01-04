@@ -27,7 +27,7 @@ const Main = () => {
       if(cookies.get('id')==null){
         navigate('/Sign');
       }else{
-      fetch("http://3.36.66.72:4000/Call", {
+      fetch("http://43.201.98.98:4000/Call", {
           method: "post",
           headers: {
             "content-type": "application/json",
@@ -88,7 +88,7 @@ const Main = () => {
       if(cookies.get('id')==null){
         navigate('/Sign');
       }else{
-        fetch("http://3.36.66.72:4000/Profile", {
+        fetch("http://43.201.98.98:4000/Profile", {
         method: "post",
         headers: {
           "content-type": "application/json",
@@ -124,14 +124,14 @@ const Main = () => {
         const formData = new FormData();
         formData.append('file', newfile);
         formData.append('cookie', cookies.get('id'));
-        axios.post("http://3.36.66.72:4000/upload", formData)
+        axios.post("http://43.201.98.98:4000/upload", formData)
         .then((res) => {
           console.log(res.data);
           fileName = res.data;
           console.log(fileName);
           setUploadedImg({
             fileName,
-            filePath: `http://3.36.66.72:3000/main/${fileName}`,
+            filePath: `http://43.201.98.98:3000/main/${fileName}`,
           });
           alert("사진 변경 완료");
         })
