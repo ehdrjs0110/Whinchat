@@ -242,14 +242,6 @@ const upload = multer({
   
 });
 
-// app.get("/upload", function (req, res) {
-//   res.render("Profile.jsx");
-// });
-
-// app.get("/home/ubuntu/project/whinchat/public/proimg/:imgName", function(req, res){
-//   res.sendFile(__dirname + "/home/ubuntu/project/whinchat/public/proimg/" + req.params.imgName);
-// });
-
 app.post('/upload', upload.single('file'), async (req, res) => {
   // console.log(req.body)
   console.log(req.file)
