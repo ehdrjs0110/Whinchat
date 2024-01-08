@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
 import '../css/Main.css';
 import {Cookies} from 'react-cookie';
 import axios from 'axios';
+import io from 'socket.io-client';
 
 const cookies = new Cookies();
 
@@ -150,18 +150,6 @@ const Main = () => {
         filePath: "",
     });
     //아바타 이미지 선택
-=======
-import io from 'socket.io-client';
-import './Main.css';
-import {Cookies} from 'react-cookie';
-const cookies = new Cookies();
-
-const Main = () => {
-
-    const [isEditingAvatar, setIsEditingAvatar] = useState(false);
-    const inputRef = useRef(null);
-  
->>>>>>> hhr
     const handleAvatarClick = () => {
       // If not editing avatar, trigger file input click
       if (!isEditingAvatar && inputRef.current) {
@@ -170,29 +158,16 @@ const Main = () => {
       // Toggle the editing state
       setIsEditingAvatar(!isEditingAvatar);
     };
-<<<<<<< HEAD
 
     // const onChange = e => {
     //   setFile(e.target.files[0]);
     //   //이미지
     //   setIsEditingAvatar(false);
     // };
-=======
-  
-    const handleImageChange = (event) => {
-      const file = event.target.files[0];
-      // Handle the selected file as needed
-      console.log('Selected image:', file);
-      // Reset state after handling the image if needed
-      setIsEditingAvatar(false);
-    };
-
->>>>>>> hhr
 
     const navigate = useNavigate();
 
     const handleClick = () => {
-<<<<<<< HEAD
       navigate('/Chat');
     }
     const mhandleClick = () => {
@@ -201,25 +176,6 @@ const Main = () => {
     const fhandleClick = () => {
       navigate('/Fr');
     }
-
-    
-
-  return (
-    <>
-<body>
-  <div class="ChatContainer">
-    <div class="row">
-      <nav class="menu">
-=======
-      navigate('/chat');
-    }
-    const mhandleClick = () => {
-      navigate('/main');
-    }
-    const fhandleClick = () => {
-      navigate('/fr');
-    }
-  
 
     const [robotColor, setRobotColor] = useState('#000');
     const [writeMessageBorderColor, setWriteMessageBorderColor] = useState('#000');
@@ -266,16 +222,6 @@ const Main = () => {
     // const chatDiv = useRef();
     // const memberDiv = useRef();
     // const friendsDiv = useRef();
-
-
-
-
-
-
-  //로그아웃
-  const logout = () => {
-    cookies.remove('id');
-  }
 
   //채팅방 socket 연결 해야함
   const loadRoom = (room_id, room_name) => {
@@ -533,68 +479,27 @@ const Main = () => {
 
   return (
     <>
-    <body>
-      
+<body>
   <div class="ChatContainer">
     <div class="row">
-    <nav class="menu">
->>>>>>> hhr
+      <nav class="menu">
         <ul class="items">
           <li class="item item-active">
             <i class="fa fa-home" aria-hidden="true" onClick={mhandleClick}></i>
           </li>
           <li class="item">
-<<<<<<< HEAD
-            <i class="fa fa-user" aria-hidden="true" onClick={fhandleClick} ></i>
-=======
             <i class="fa fa-user" aria-hidden="true" onClick={fhandleClick}>
             </i>
           </li>
           <li class="item">
             <i class="fa fa-pencil" aria-hidden="true" onClick={() => setModalOpen(true)}></i>
->>>>>>> hhr
           </li>
           <li class="item">
             <i class="fa fa-commenting" aria-hidden="true" onClick={handleClick}></i>
           </li>
-<<<<<<< HEAD
           {/* 로그아웃 버튼 */}
           <li class="item" onClick={logout}>
             <i class="fa-solid fa-right-from-bracket fa-2x" aria-hidden="true"></i>
-          </li>
-        </ul>
-      </nav>
-      <div class="card-body">
-        <form class="profile">
-              <img class="mainavatar" src={(file!==undefined) ? process.env.PUBLIC_URL+"/proimg/"+file : "http://bootdey.com/img/Content/avatar/avatar1.png"} alt="Uploaded" onClick={handleAvatarClick} style={{ width: "230px", height: "230px" }} />
-                {/* <h3>{fileName}</h3> */}
-              <input 
-                accept="image/*" 
-                ref={inputRef} 
-                type="file" 
-                style={{ display: 'none' }}
-                onChange={(e) => setnewFile(e.target.files[0])}/>  
-                <button class="btn-btn-primary" type="button" onClick={upload}>사진 변경</button>
-        </form>
-
-        <div className="main-input-field">
-        <i className="fas fa-user"></i>
-        <input type="text" placeholder={ callname || "닉네임을 입력하세요."} id='name' name='name' onChange={handleProfile} required/>
-        </div>
-        <div className="main-input-field2">
-          <i className="fas fa-file"></i>
-          <input type="text" placeholder={ callpr || "자기소개를 적어주세요." } id='pr' name='pr' onChange={handleProfile} />
-        </div>
-        <button class="btn-btn-primary" type="button" onClick={submitProfile}>프로필 변경</button>
-      </div>
-    </div>
-  </div>
-</body>
-=======
-          <li class="item">
-            <button onClick={logout}>  {/* 로그아웃 버튼 */}
-          <i class="fa-solid fa-right-from-bracket fa-2x" aria-hidden="true"></i>
-          </button>
           </li>
         </ul>
       </nav>
@@ -630,31 +535,32 @@ const Main = () => {
         </div>
         
       }
-              <div class="card-body">
-                    <img class="mainavatar" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt=""  onClick={handleAvatarClick}/>
-                    <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    style={{ display: 'none' }}
-                    ref={inputRef}
-                  />
+      <div class="card-body">
+        <form class="profile">
+              <img class="mainavatar" src={(file!==undefined) ? process.env.PUBLIC_URL+"/proimg/"+file : "http://bootdey.com/img/Content/avatar/avatar1.png"} alt="Uploaded" onClick={handleAvatarClick} style={{ width: "230px", height: "230px" }} />
+                {/* <h3>{fileName}</h3> */}
+              <input 
+                accept="image/*" 
+                ref={inputRef} 
+                type="file" 
+                style={{ display: 'none' }}
+                onChange={(e) => setnewFile(e.target.files[0])}/>  
+                <button class="btn-btn-primary" type="button" onClick={upload}>사진 변경</button>
+        </form>
 
-              <div className="main-input-field">
-                  <i className="fas fa-user"></i>
-                  <input type="text" placeholder="닉네임을 입력하세요." required/>
-              </div>
-
-              <div className="main-input-field2">
-                  <i className="fas fa-file"></i>
-                  <input type="text" placeholder="자기소개를 적어주세요."/>
-              </div>
-                <button class="btn-btn-primary" type="button">제출</button>
-                </div>
-            </div>
+        <div className="main-input-field">
+        <i className="fas fa-user"></i>
+        <input type="text" placeholder={ callname || "닉네임을 입력하세요."} id='name' name='name' onChange={handleProfile} required/>
+        </div>
+        <div className="main-input-field2">
+          <i className="fas fa-file"></i>
+          <input type="text" placeholder={ callpr || "자기소개를 적어주세요." } id='pr' name='pr' onChange={handleProfile} />
+        </div>
+        <button class="btn-btn-primary" type="button" onClick={submitProfile}>프로필 변경</button>
+      </div>
+    </div>
   </div>
-    </body>
->>>>>>> hhr
+</body>
     </>
   );
 };
