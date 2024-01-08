@@ -2,9 +2,6 @@ import './App.css';
 
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import React, { Component, useRef, useEffect, useState} from "react";
-
-//Router
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {Cookies} from 'react-cookie';
 
 
