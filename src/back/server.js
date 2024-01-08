@@ -12,22 +12,22 @@ const User = mongoose.model('collection',{
     pwd: String
 });
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb://127.0.0.1:27017";
+// const { MongoClient, ServerApiVersion } = require('mongodb');
+// const uri = "mongodb://127.0.0.1:27017";
 
 // 데이터베이스와 컬렉션 이름
-const dbName = 'wodysl';
-const collectionName = 'member';
+// const dbName = 'wodysl';
+// const collectionName = 'member';
 
-const client = new MongoClient(uri, {
-serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-}
-});
-const database = client.db(dbName);
-const collection = database.collection(collectionName);
+// const client = new MongoClient(uri, {
+// serverApi: {
+//     version: ServerApiVersion.v1,
+//     strict: true,
+//     deprecationErrors: true,
+// }
+// });
+// const database = client.db(dbName);
+// const collection = database.collection(collectionName);
 
 app.use(express.json()); // 수정: 함수 호출
 app.use(express.urlencoded({extended: false}))
