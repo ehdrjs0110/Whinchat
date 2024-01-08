@@ -12,6 +12,22 @@ const User = mongoose.model('collection',{
     pwd: String
 });
 
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb://127.0.0.1:27017";
+
+// 데이터베이스와 컬렉션 이름
+const dbName = 'wodysl';
+const collectionName = 'member';
+
+const client = new MongoClient(uri, {
+serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+}
+});
+const database = client.db(dbName);
+const collection = database.collection(collectionName);
 
 app.use(express.json()); // 수정: 함수 호출
 app.use(express.urlencoded({extended: false}))
@@ -88,8 +104,6 @@ app.post('/signIn',async(req,res) => {  // 로그인 데이터 불러오기
     client.connect();
     console.log("connected")
 
-    const database = client.db(dbName);
-    const collection = database.collection(collectionName);
 
     const data = await collection.findOne({ id: id });
     console.log('Fetched data:', data);
@@ -133,10 +147,8 @@ app.post('/signUp', async (req, res) => { // 회원가입 데이터 불러오기
   });
 
   client.connect();
-  console.log("connected")
+  console.log("connected");
 
-  const database = client.db(dbName);
-  const collection = database.collection(collectionName);
   const distinctId = await collection.findOne({ id });
 
   if (distinctId) {

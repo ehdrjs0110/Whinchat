@@ -11,10 +11,13 @@ const Fr = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-      navigate('/Chat');
+      navigate('/chat');
     }
     const mhandleClick = () => {
-      navigate('/Main');
+      navigate('/main');
+    }
+    const fhandleClick = () => {
+      navigate('/fr');
     }
 
     const [robotColor, setRobotColor] = useState('#000');
@@ -32,7 +35,7 @@ const Fr = () => {
     // -----------------------------------------------------------------------
     const [test, setTest] = useState();
 
-  var socket = io.connect('http://localhost:8080', 
+  var socket = io.connect('http://localhost:8088', 
   {transports: ['websocket']});
 
   // let roomId, roomName, memberId;
@@ -43,6 +46,7 @@ const Fr = () => {
   //room, friends
   const [listRoom, setListRoom] = useState([]);
   const [listFriends, setListFriends] = useState([]);
+  const [listFriendsIndex, setListFriendsIndex] = useState([]);
   const [room, setRoom] = useState(null);
   const [member, setMember] = useState({});
   const [inviteMember, setInviteMember] = useState([]);
@@ -91,48 +95,52 @@ const Fr = () => {
   }
   
   // const login = () => {
-    useEffect( () => {
+    const login = () => {
+      const member_id = inputId.current.value;
+      setMemberId(member_id);
+      const url = 'http://localhost:3001/login';
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({memberId : member_id})
+      };
       
-    // const member_id = inputId.current.value;
-    // setMemberId(member_id);
-
-    const url = 'http://localhost:3001/login';
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({memberId : memberId})
-    };
-
-    fetch(url, options)
-    .then(response => response.json())
-    .then(data =>{
-      if(data.member.room != null){
-        setListRoom(data.member.room);
-      }
-      else{
-        setListRoom(null);
-      }
-
-      if(data.member.friends != null){
-        setListFriends(data.member.friends);
-      }
-      else{
-        setListFriends(null);
-      }
-    })
-    .catch(error => console.error('Error:', error));
-  // }
-  })
+      fetch(url, options)
+      .then(response => response.json())
+      .then(data =>{
+        if(data.member.room != null){
+          setListRoom(data.member.room);
+        }
+        else{
+          setListRoom(null);
+        }
+        
+        if(data.member.friends != null){
+          setListFriends(data.member.friends);
+          const temp = [];
+          for(var i=0 ; i<data.member.friends.length ; i++){
+            const str = "friend" + i;
+            temp[i] = str;
+          }
+          setListFriendsIndex(temp);
+        }
+        else{
+          setListFriends(null);
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    }
 
   const friend = async (data) => {
-    alert(memberId);
+    // alert(memberId);
     let friendId;
 
     let url = 'http://localhost:3001/friend';
 
     if(data.type === "add"){
+      // alert("add");
       url += "Add";
       friendId = inputFriendId.current.value;
     }
@@ -226,7 +234,7 @@ const Fr = () => {
   }
 
   const sendMessage = () => {
-    alert(roomId);
+    // alert(roomId);
     socket.emit('sendMessage', { id:memberId, roomId:roomId, message:inputMessage.current.value });
     inputMessage.current.value = null;
   }
@@ -258,7 +266,7 @@ const Fr = () => {
   // }
   function invite(){
     const checkBtn = document.querySelectorAll(".checkBtn");
-    alert(checkBtn.length);
+    // alert(checkBtn.length);
     const flag = [];
     const idList = [];
     for(var i=0 ; i<checkBtn.length ; i++){
@@ -269,7 +277,7 @@ const Fr = () => {
             idList[i] = checkBtn[i].value;
         }
     }
-    alert(roomId);
+    // alert(roomId);
     //socket.emit('invite', {flag:flag, id:memberId, roomId:roomId, roomName: roomName});
     socket.emit('invite', {idList:idList, id:memberId, roomId:roomId, roomName: roomName});
   }
@@ -289,26 +297,33 @@ const Fr = () => {
   });
   
   socket.on('message', (data) => {
-    alert("hhh");
+    // alert("hhh");
     setRoom(data.room);
     setListRoom(data.member.room);
   });
 
   socket.on('load', (data) => {
-    alert(data);
+    // alert(data);
   });
+
+  //로그아웃
+  const logout = () => {
+    cookies.remove('id');
+  }
+
   return (
     <>
 <body>
   <div class="ChatContainer">
+  {/* <button onClick={login}>버튼</button> */}
     <div class="row">
-      <nav class="menu">
+    <nav class="menu">
         <ul class="items">
           <li class="item">
             <i class="fa fa-home" aria-hidden="true" onClick={mhandleClick}></i>
           </li>
           <li class="item item-active">
-            <i class="fa fa-user" aria-hidden="true">
+            <i class="fa fa-user" aria-hidden="true" onClick={fhandleClick}>
             </i>
           </li>
           <li class="item">
@@ -318,7 +333,7 @@ const Fr = () => {
             <i class="fa fa-commenting" aria-hidden="true" onClick={handleClick}></i>
           </li>
           <li class="item">
-            <button>  {/* 로그아웃 버튼 */}
+            <button onClick={logout}>  {/* 로그아웃 버튼 */}
           <i class="fa-solid fa-right-from-bracket fa-2x" aria-hidden="true"></i>
           </button>
           </li>
@@ -333,28 +348,33 @@ const Fr = () => {
         }}>
           <div className={'modal-content'}>
             <p>친구 목록</p>
-            <div className="frends">
+            <div className="friends">
               {/* 친구 목록 출력 */}
               
               {listFriends != null &&
-                listFriends.map((friends) => (
-                  <div key={friends.id}>
-                    <span><strong>{friends.name}</strong></span>
-                    <button onClick={() => friendChat(friends.id)}>채팅</button>
-                    {/* <button onClick={() => friend("sub")}>삭제</button> */}
-                    <button onClick={() => friend({type:"sub", friendId:friends.id})}>삭제</button>
-                    
-                    <br/>
-                  </div>
-                ))
-              }
+              listFriends.map((friends, index) => (
+                <div key={friends.id}>
+                  <label htmlFor={index}>{friends.name}</label>
+                  <input type="checkbox" id={"friend"+index} value={friends.id} />
+                  {/* <span><strong>{friends.name}</strong></span> */}
+                  {/* <button onClick={() => friendChat(friends.id)}>채팅</button> */}
+                  {/* <button onClick={() => friend("sub")}>삭제</button> */}
+                  {/* <button onClick={() => friend({type:"sub", friendId:friends.id})}>삭제</button> */}
+                  {/* <br/> */}
+                </div>
+              ))
+            }
               {/* 이외의 버튼도 frends 박스 안에 넣으삼 */}
             </div>
-            <button className={'modal-close-btn'} onClick={() => setModalOpen(false)}>닫기</button>
+            <button className='modal-close-btn' onClick={() => setModalOpen(false)}>닫기</button>
+            <button className='modal-close-btn' onClick={joinRoom}>방 생성</button>  {/* 초대랑 삭제버튼은 없애고 위에 친구 목록 출력 안에 넣으삼 */}
+            {/* <button className={'modal-close-btn'} onClick={() => setModalOpen(false)}>닫기</button> */}
           </div>
         </div>
       }
       <section class="discussions">
+      id : <input type="text" id="memberId" ref={inputId}/>
+      <button onClick={login}>로그인</button>
         <div class="discussion search">
           <div class="searchbar">
             <button onClick={() => friend({type:"add"})}>  {/* 친구 추가 */}
@@ -372,7 +392,7 @@ const Fr = () => {
             <div key={friends.id} class="discussion_message">
               <div className="chatroom">
                 <span><strong>{friends.name}</strong></span>
-                <button onClick={() => friendChat(friends.id)}>채팅</button><br/>
+                <button onClick={() => friendChat(friends.id)}>채팅</button>
                 <button onClick={() => friend({type:"sub", friendId:friends.id})}>삭제</button>
                 <br/></div>
             </div>
@@ -382,6 +402,7 @@ const Fr = () => {
 
       <section class="chat">
         <div class="header-chat">
+        <button onClick={leaveRoom}>나가기</button>
           <i class="icon fa fa-user-o" aria-hidden="true"></i>
           <p class="name" >대화 상대 이름</p>
           <button>
@@ -391,7 +412,7 @@ const Fr = () => {
         <div class="messages-chat">
         {room != null &&
           room.log.map((log) => (
-            <p key={log.time}>[{log.time}] <strong>{log.sender} :</strong> {log.content} </p>
+            <p key={log.time}><strong>{log.sender} </strong> [{log.time}] <span>{log.content}</span> </p>
             ))
           }
           {/* 대화 내용 출력 */}
