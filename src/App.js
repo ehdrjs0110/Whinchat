@@ -20,7 +20,7 @@ function App() {
   // cookies.set("id","wodysl");
   return (
     <div className="App">
-    <BrowserRouter>
+    <Router>
         <Routes>
           <Route path="/Sign" element={<Sign />} />
           <Route path="/Chat" element={<Chat />} />
@@ -28,7 +28,7 @@ function App() {
           <Route path="/Main" element={<Main />} />
           <Route path="/Gpt" element={<Gpt />} />
         </Routes>
-      </BrowserRouter>
+      </Router>
     </div>
   ); 
 }
