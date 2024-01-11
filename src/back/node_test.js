@@ -38,11 +38,11 @@ const User = mongoose.model('collection',{
   pwd: String
 });
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb://127.0.0.1:27017";
-
 // 데이터베이스와 컬렉션 이름
-const dbName = 'wodysl';
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb://127.0.0.1:16045";
+ 
+const dbName = 'whinchat';
 const collectionName = 'member';
 
 const client = new MongoClient(uri, {
@@ -224,59 +224,6 @@ app.post('/friendChat', async (req, res) => {
   res.json({member:member, room:room});
 });
 
-
-
-
-app.post('/signIn',async(req,res) => {  // 로그인 데이터 불러오기
-
-  const {id,pwd} = req.body;
-
-  console.log(req.body.id)
-  console.log(req.body.pwd)
-
-
-  client.connect();
-  console.log("connected")
-
-
-  const data = await collection.findOne({ id: id });
-  console.log('Fetched data:', data);
-  
-  if(data){
-      if(data.pwd===pwd){
-          res.json({messege: "Login suceessful! 김지영!!", cheked: true});
-      }else{
-          res.json({messege: "ID or PASSWORD error", cheked: false});
-      }
-  }else{
-      res.json({messege: "ID or PASSWORD error", cheked: false});
-  }
-  client.close();
-  console.log('Connection closed');
-} );
-
-app.post('/signUp', async (req, res) => { // 회원가입 데이터 불러오기
-  const { id, pwd } = req.body;
-
-  console.log(req.body.id)
-  console.log(req.body.pwd)
-
-  client.connect();
-  console.log("connected");
-
-  const distinctId = await collection.findOne({ id });
-
-  if (distinctId) {
-    return res.json({ success: false, message: '이미 존재하는 ID입니다.' });
-  } else {
-    await collection.insertOne({ id, pwd });
-    res.json({ success: true, message: '회원가입 성공' });
-  }
-  client.close();
-  console.log('연결 해제');
-});
-
-
 // socket.on('friendChat', async ({id, friendId}) => {
 //   // 현재 시간을 나타내는 Date 객체 생성
 //   const currentDate = new Date();
@@ -293,10 +240,3 @@ app.post('/signUp', async (req, res) => { // 회원가입 데이터 불러오기
 //   // 해당 채팅방에 현재 유저 입장 메시지 전송
 //   io.to(roomId).emit('friendChat', roomId, await findChat(roomId), await findMember(id));
 // });
-
-app.post('/login', async (req, res) => {
-  const memberId = req.body.memberId;
-  const member = await findMember(memberId);
-
-  res.json({member: member});
-});

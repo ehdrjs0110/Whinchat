@@ -3,10 +3,10 @@
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const { RemoteSocket } = require('socket.io');
-const uri = "mongodb://localhost:27017";
+const uri = "mongodb://127.0.0.1:16045";
 
 // 데이터베이스와 컬렉션 이름
-const dbName = 'wodysl';
+const dbName = 'whinchat';
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
