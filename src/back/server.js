@@ -206,6 +206,20 @@ app.post('/upload', upload.single('file'), async (req, res) => {
   );
   const filterCriteria = { id: req.body.cookie };
   //console.log("쿠키 값이 넘어와? : "+req.body.cookie);
+  //DB
+  const { MongoClient, ServerApiVersion } = require('mongodb');
+  const uri = "mongodb://127.0.0.1:16045";
+
+  const dbName = 'whinchat';  // Corrected typo here
+  const collectionName = 'member';
+
+  const client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    }
+  });
 
   const database = client.db(dbName);
   const collection = database.collection(collectionName);
