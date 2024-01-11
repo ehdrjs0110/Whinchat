@@ -12,6 +12,20 @@ const User = mongoose.model('collection',{
     pwd: String
 });
 
+//데이터베이스와 컬렉션 이름
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb://127.0.0.1:16045";
+ 
+const dbName = 'whinchat';
+const collectionName = 'member';
+
+const client = new MongoClient(uri, {
+  serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+  }
+});
 
 app.use(express.json()); // 수정: 함수 호출
 app.use(express.urlencoded({extended: false}))
@@ -24,21 +38,6 @@ app.post('/call',async(req,res) => {  // 디비 저장 값 가져오기
 
     console.log(req.body.id)
 
-    const { MongoClient, ServerApiVersion } = require('mongodb');
-    const uri = "mongodb://127.0.0.1:16045";
-
-    // 데이터베이스와 컬렉션 이름
-    const dbName = 'whinchat';
-    const collectionName = 'member';
-
-    const client = new MongoClient(uri, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-    }
-    });
- 
     client.connect();
     console.log("connected")
 
@@ -69,21 +68,6 @@ app.post('/signIn',async(req,res) => {  // 로그인 데이터 불러오기
 
     console.log(req.body.id)
     console.log(req.body.pwd)
-
-    const { MongoClient, ServerApiVersion } = require('mongodb');
-    const uri = "mongodb://127.0.0.1:16045";
-
-    // 데이터베이스와 컬렉션 이름
-    const dbName = 'whinchat';
-    const collectionName = 'member';
-
-    const client = new MongoClient(uri, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-    }
-    });
  
     client.connect();
     console.log("connected")
@@ -118,20 +102,6 @@ app.post('/signUp', async (req, res) => { // 회원가입 데이터 불러오기
   console.log(req.body.id)
   console.log(req.body.pwd)
 
-  const { MongoClient, ServerApiVersion } = require('mongodb');
-  const uri = "mongodb://127.0.0.1:16045";
-
-  const dbName = 'whinchat';  // Corrected typo here
-  const collectionName = 'member';
-
-  const client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    }
-  });
-
   client.connect();
   console.log("connected")
 
@@ -157,21 +127,6 @@ app.post('/profile',async(req,res) => {  // 프로필 변경
     console.log(req.body.name)
     console.log(req.body.pr)
     console.log(req.body.id)
-
-    const { MongoClient, ServerApiVersion } = require('mongodb');
-    const uri = "mongodb://127.0.0.1:16045";
-
-    // 데이터베이스와 컬렉션 이름
-    const dbName = 'whinchat';
-    const collectionName = 'member';
-
-    const client = new MongoClient(uri, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-    }
-    });
 
     if(id!=null){
       
@@ -251,20 +206,6 @@ app.post('/upload', upload.single('file'), async (req, res) => {
   );
   const filterCriteria = { id: req.body.cookie };
   //console.log("쿠키 값이 넘어와? : "+req.body.cookie);
-  //DB
-  const { MongoClient, ServerApiVersion } = require('mongodb');
-  const uri = "mongodb://127.0.0.1:16045";
-
-  const dbName = 'whinchat';  // Corrected typo here
-  const collectionName = 'member';
-
-  const client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    }
-  });
 
   const database = client.db(dbName);
   const collection = database.collection(collectionName);
@@ -300,7 +241,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
   
 });
 
-app.post('/logout',async(req,res) => {  // 프로필 변경
+app.post('/logout',async(req,res) => {  // 로그아웃
 
   try{
 
