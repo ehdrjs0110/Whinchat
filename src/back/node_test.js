@@ -156,6 +156,8 @@ app.post('/login', async (req, res) => {
   const memberId = req.body.memberId;
   const member = await findMember(memberId);
 
+  console.log(member);
+
   res.json({member: member});
 });
 
