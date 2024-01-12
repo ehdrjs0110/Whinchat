@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import '../css/Chat.css';
 import {Cookies} from 'react-cookie';
+
 const cookies = new Cookies();
+const cookieId = cookies.get('id');
 
 const Chat = () => {
 
@@ -143,7 +145,7 @@ const Chat = () => {
   // useEffect( () => {
     // cookies.set("id","wodysl");
     const login = () => {
-      const member_id = inputId.current.value;
+      const member_id = cookieId;
       setMemberId(member_id);
       const url = 'http://localhost:3001/login';
       const options = {
@@ -429,8 +431,8 @@ const Chat = () => {
         
       }
       <section class="discussions">
-      id : <input type="text" id="memberId" ref={inputId}/>
-      <button onClick={login}>로그인</button>
+      {/* id : <input type="text" id="memberId" ref={inputId}/>
+      <button onClick={login}>로그인</button> */}
         <div class="discussion search">
           <div class="searchbar">
             <button>  {/* 채팅방 검색 */}

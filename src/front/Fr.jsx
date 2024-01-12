@@ -4,9 +4,10 @@ import io from 'socket.io-client';
 import '../css/Chat.css';
 import {Cookies} from 'react-cookie';
 
+const cookies = new Cookies();
+const cookieId = cookies.get('id');
 
 const Fr = () => {
-  const cookies = new Cookies();
     
     const navigate = useNavigate();
 
