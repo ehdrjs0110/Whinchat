@@ -97,7 +97,7 @@ const Fr = () => {
   
   // const login = () => {
     const login = () => {
-      const member_id = inputId.current.value;
+      const member_id = cookieId;
       setMemberId(member_id);
       const url = 'http://localhost:3001/login';
       const options = {

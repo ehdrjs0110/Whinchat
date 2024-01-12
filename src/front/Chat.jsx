@@ -431,8 +431,7 @@ const Chat = () => {
         
       }
       <section class="discussions">
-      {/* id : <input type="text" id="memberId" ref={inputId}/>
-      <button onClick={login}>로그인</button> */}
+      <button onClick={login}>로그인</button>
         <div class="discussion search">
           <div class="searchbar">
             <button>  {/* 채팅방 검색 */}
