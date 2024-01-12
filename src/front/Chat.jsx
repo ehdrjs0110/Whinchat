@@ -41,7 +41,7 @@ const Chat = () => {
         // var gpt_q = document.getElementById("gpt_q").value;
         var gpt_q = inputMessage.current.value;
 
-        const url = 'http://http://43.201.98.98:3001/gpt';
+        const url = 'http://43.201.98.98:3001/gpt';
         const gpt_q_json = {query: gpt_q};
         
         if (gpt_q_json.gpt_q !== "" && gpt_q_json.gpt_category !== "") {
@@ -70,7 +70,7 @@ const Chat = () => {
     // -----------------------------------------------------------------------
     const [test, setTest] = useState();
 
-    var socket = io.connect('http://http://43.201.98.98:8088', 
+    var socket = io.connect('http://43.201.98.98:8088', 
     {transports: ['websocket']});
 
     // let roomId, roomName, memberId;
@@ -116,7 +116,7 @@ const Chat = () => {
     setRoomId(room_id);
     setRoomName(room_name);
 
-    const url = 'http://http://43.201.98.98:3001/loadRoom';
+    const url = 'http://43.201.98.98:3001/loadRoom';
     const options = {
         method: 'POST',
         headers: {
@@ -147,7 +147,7 @@ const Chat = () => {
     const login = () => {
       const member_id = cookieId;
       setMemberId(member_id);
-      const url = 'http://http://43.201.98.98:3001/login';
+      const url = 'http://43.201.98.98:3001/login';
       const options = {
         method: 'POST',
         headers: {
@@ -187,7 +187,7 @@ const Chat = () => {
       // alert(memberId);
       let friendId;
       
-    let url = 'http://http://43.201.98.98:3001/friend';
+    let url = 'http://43.201.98.98:3001/friend';
 
     if(data.type === "add"){
       url += "Add";
@@ -222,7 +222,7 @@ const Chat = () => {
   }
   
   const friendChat = (friendId) => {
-    const url = 'http://http://43.201.98.98:3001/friendChat';
+    const url = 'http://43.201.98.98:3001/friendChat';
 
     const options = {
       method: 'POST',
@@ -250,7 +250,7 @@ const Chat = () => {
   }
 
   const joinRoom = () => {
-    const url = 'http://http://43.201.98.98:3001/joinRoom';
+    const url = 'http://43.201.98.98:3001/joinRoom';
     let room_id;
 
     //checkbox 표시
