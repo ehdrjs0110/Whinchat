@@ -139,6 +139,8 @@ const Chat = () => {
     
     // inviteMap();
     socket.emit('loadRoom', room_id);
+    
+    chatScroll.current.scrollIntoView({ behavior: 'smooth' });
   }
   
   
@@ -304,8 +306,6 @@ const Chat = () => {
     // alert(roomId);
     socket.emit('sendMessage', { id:memberId, roomId:roomId, message:inputMessage.current.value });
     inputMessage.current.value = null;
-
-    chatScroll.current.scrollIntoView({ behavior: 'smooth' });
   }
 
   const leaveRoom = () => {
@@ -370,6 +370,7 @@ const Chat = () => {
     // alert("hhh");
     setRoom(data.room);
     setListRoom(data.member.room);
+    chatScroll.current.scrollIntoView({ behavior: 'smooth' });
   });
 
   socket.on('load', (data) => {
