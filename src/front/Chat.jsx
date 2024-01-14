@@ -184,9 +184,12 @@ const Chat = () => {
 
     login();
 
-    chatScroll.current.scrollIntoView({ behavior: 'smooth' });
-
   }, [memberId])
+
+  //room이 변경될 때마다 스크롤 실행
+  useEffect(() => {
+    chatScroll.current.scrollIntoView({ behavior: 'smooth' });
+  }, [room]);
     
     const friend = async (data) => {
       // alert(memberId);
