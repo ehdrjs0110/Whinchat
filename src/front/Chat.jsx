@@ -183,6 +183,9 @@ const Chat = () => {
     }
 
     login();
+
+    chatScroll.current.scrollIntoView({ behavior: 'smooth' });
+
   }, [memberId])
     
     const friend = async (data) => {
@@ -299,7 +302,7 @@ const Chat = () => {
     socket.emit('sendMessage', { id:memberId, roomId:roomId, message:inputMessage.current.value });
     inputMessage.current.value = null;
 
-    chatScroll.current.scrollTop = chatScroll.current.scrollHeight;
+    chatScroll.current.scrollIntoView({ behavior: 'smooth' });
   }
 
   const leaveRoom = () => {
@@ -465,13 +468,14 @@ const Chat = () => {
           <i class="fa fa-xmark fa-2x"></i>
         </div>
 
-        <div class="messages-chat" ref={chatScroll}>
+        <div class="messages-chat">
         {room != null &&
           room.log.map((log) => (
             <p key={log.time}><strong>{log.sender} </strong> [{log.time}] <span>{log.content}</span> </p>
           ))
         }
           {/* 대화 내용 출력 */}
+          <div ref={chatScroll}></div> {/* 채팅 스크롤 내리기 */}
         </div>
          
         <div class="footer-chat">
