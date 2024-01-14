@@ -142,8 +142,7 @@ const Chat = () => {
   
   
   
-  // useEffect( () => {
-    // cookies.set("id","wodysl");
+  useEffect( () => {
     const login = () => {
       const member_id = cookieId;
       setMemberId(member_id);
@@ -181,7 +180,9 @@ const Chat = () => {
       })
       .catch(error => console.error('Error:', error));
     }
-    // }, [memberId])
+
+    login();
+  }, [memberId])
     
     const friend = async (data) => {
       // alert(memberId);
@@ -431,7 +432,6 @@ const Chat = () => {
         
       }
       <section class="discussions">
-      <button onClick={login}>로그인</button>
         <div class="discussion search">
           <div class="searchbar">
             <button>  {/* 채팅방 검색 */}

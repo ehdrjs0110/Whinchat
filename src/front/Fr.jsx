@@ -95,7 +95,7 @@ const Fr = () => {
     socket.emit('loadRoom', room_id);
   }
   
-  // const login = () => {
+  useEffect( () => {
     const login = () => {
       const member_id = cookieId;
       setMemberId(member_id);
@@ -133,6 +133,8 @@ const Fr = () => {
       })
       .catch(error => console.error('Error:', error));
     }
+    login();
+  }, [memberId])
 
   const friend = async (data) => {
     // alert(memberId);
@@ -374,8 +376,6 @@ const Fr = () => {
         </div>
       }
       <section class="discussions">
-      id : <input type="text" id="memberId" ref={inputId}/>
-      <button onClick={login}>로그인</button>
         <div class="discussion search">
           <div class="searchbar">
             <button onClick={() => friend({type:"add"})}>  {/* 친구 추가 */}
