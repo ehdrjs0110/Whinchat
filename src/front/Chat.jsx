@@ -95,6 +95,7 @@ const Chat = () => {
     const inputId = useRef();
     const inputMessage = useRef();
     const inputFriendId = useRef();
+    const chatScroll = useRef(null);
 
     //div
     // const chatDiv = useRef();
@@ -297,6 +298,8 @@ const Chat = () => {
     // alert(roomId);
     socket.emit('sendMessage', { id:memberId, roomId:roomId, message:inputMessage.current.value });
     inputMessage.current.value = null;
+
+    chatScroll.current.scrollTop = chatScroll.current.scrollHeight;
   }
 
   const leaveRoom = () => {
@@ -462,7 +465,7 @@ const Chat = () => {
           <i class="fa fa-xmark fa-2x"></i>
         </div>
 
-        <div class="messages-chat">
+        <div class="messages-chat" ref={chatScroll}>
         {room != null &&
           room.log.map((log) => (
             <p key={log.time}><strong>{log.sender} </strong> [{log.time}] <span>{log.content}</span> </p>
