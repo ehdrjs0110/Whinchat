@@ -95,7 +95,7 @@ const Chat = () => {
     const inputId = useRef();
     const inputMessage = useRef();
     const inputFriendId = useRef();
-    const chatScroll = useRef(null);
+    const chatScroll = useRef<HTMLDivElement | null>(null);
 
     //div
     // const chatDiv = useRef();
