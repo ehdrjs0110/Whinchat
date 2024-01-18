@@ -5,6 +5,7 @@ import {Cookies} from 'react-cookie';
 import axios from 'axios';
 
 const cookies = new Cookies();
+const cookieId = cookies.get('id');
 
 const Main = () => {
     const [isEditingAvatar, setIsEditingAvatar] = useState(false);
@@ -185,14 +186,14 @@ const Main = () => {
     <div class="row">
       <nav class="menu">
         <ul class="items">
-          <li class="item item-active">
-            <i class="fa fa-home" aria-hidden="true" onClick={mhandleClick}></i>
+          <li class="item item-active" onClick={mhandleClick}>
+            <i class="fa fa-home" aria-hidden="true"></i>
           </li>
-          <li class="item">
-            <i class="fa fa-user" aria-hidden="true" onClick={fhandleClick} ></i>
+          <li class="item" onClick={fhandleClick}>
+            <i class="fa fa-user" aria-hidden="true"></i>
           </li>
-          <li class="item">
-            <i class="fa fa-commenting" aria-hidden="true" onClick={handleClick}></i>
+          <li class="item" onClick={handleClick}>
+            <i class="fa fa-commenting" aria-hidden="true"></i>
           </li>
           {/* 로그아웃 버튼 */}
           <li class="item" onClick={logout}>
