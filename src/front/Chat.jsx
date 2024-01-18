@@ -388,23 +388,22 @@ const Chat = () => {
 
     <nav class="menu">
         <ul class="items">
-          <li class="item">
-            <i class="fa fa-home" aria-hidden="true" onClick={mhandleClick}></i>
+          <li class="item" onClick={mhandleClick}>
+            <i class="fa fa-home" aria-hidden="true"></i>
           </li>
-          <li class="item">
-            <i class="fa fa-user" aria-hidden="true" onClick={fhandleClick}>
+          <li class="item" onClick={fhandleClick}>
+            <i class="fa fa-user" aria-hidden="true">
             </i>
           </li>
-          <li class="item">
-            <i class="fa fa-pencil" aria-hidden="true" onClick={() => setModalOpen(true)}></i>
+          <li class="item" onClick={() => setModalOpen(true)}>
+            <i class="fa fa-pencil" aria-hidden="true"></i>
           </li>
-          <li class="item item-active">
-            <i class="fa fa-commenting" aria-hidden="true" onClick={handleClick}></i>
+          <li class="item item-active" onClick={handleClick}>
+            <i class="fa fa-commenting" aria-hidden="true"></i>
           </li>
-          <li class="item">
-            <button> 
-          <i class="fa-solid fa-right-from-bracket fa-2x" aria-hidden="true"></i>
-          </button>
+          {/* 로그아웃 버튼 */}
+          <li class="item" onClick={logout}>
+            <i class="fa fa-right-from-bracket" aria-hidden="true"></i>
           </li>
         </ul>
       </nav>
