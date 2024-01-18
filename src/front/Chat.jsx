@@ -376,6 +376,11 @@ const Chat = () => {
     // alert(data);
   });
   
+  //로그아웃
+  const logout = () => {
+    cookies.remove('id');
+    navigate('/Sign');
+  }
 
   return (
     <>

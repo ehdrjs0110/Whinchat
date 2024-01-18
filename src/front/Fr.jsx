@@ -312,6 +312,7 @@ const Fr = () => {
   //로그아웃
   const logout = () => {
     cookies.remove('id');
+    navigate('/Sign');
   }
 
   return (
