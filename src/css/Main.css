@@ -2,7 +2,7 @@
     /* border: 1px solid red; */
     width: 500px;
     height: 960px;
-    overflow: hidden;
+    /* overflow: hidden; */
     padding-top: 150px;
 }
 
@@ -22,7 +22,6 @@
     background-color: #f0f0f0;
     height: 55px;
     border-radius: 55px;
-    display: grid;
     grid-template-columns: 15% 85%;
     position: relative;
     box-shadow:0 1px 3px rgba(0, 0, 0, 0.8) inset;
