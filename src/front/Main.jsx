@@ -197,7 +197,7 @@ const Main = () => {
           </li>
           {/* 로그아웃 버튼 */}
           <li class="item" onClick={logout}>
-            <i class="fa-solid fa-right-from-bracket fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-right-from-bracket" aria-hidden="true"></i>
           </li>
         </ul>
       </nav>
