@@ -201,8 +201,8 @@ const Main = () => {
           </li>
         </ul>
       </nav>
-      <div class="">
-        <form class="profile">
+      <div class="card-body">
+        <form class="">
               <img class="mainavatar" src={(file!==undefined) ? process.env.PUBLIC_URL+"/proimg/"+file : "http://bootdey.com/img/Content/avatar/avatar1.png"} alt="Uploaded" onClick={handleAvatarClick} style={{ width: "230px", height: "230px" }} />
                 {/* <h3>{fileName}</h3> */}
               <input 
